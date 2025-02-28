@@ -62,14 +62,9 @@ export async function generateMetadata({
     };
 }
 
-export default async function Blog({
-    params,
-}: {
-    params: Promise<{ slug: string }> | { slug: string };
-}) {
-    const resolvedParams = await params;
+export default async function Blog({ params }: { params: { slug: string } }) {
     const posts = await getBlogPosts();
-    const post = posts.find((post) => post.slug === resolvedParams.slug);
+    const post = posts.find((post) => post.slug === params.slug);
 
     if (!post) {
         notFound();
@@ -93,7 +88,7 @@ export default async function Blog({
         image: post.metadata.image
             ? `${baseUrl}${post.metadata.image}`
             : `${baseUrl}/og?title=${encodeURIComponent(post.metadata.title)}`,
-        url: `${baseUrl}/blog/${resolvedParams.slug}`,
+        url: `${baseUrl}/blog/${params.slug}`,
         author: {
             "@type": "Person",
             name: "My Portfolio",
