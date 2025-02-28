@@ -9,6 +9,7 @@ import { ImageBlock, VideoBlock } from "./mdx-components/media";
 import { ImageCarousel } from "./ImageCarousel";
 import { ChallengeCard } from "./ChallengeCard";
 import { SolutionCard } from "./SolutionCard";
+import { GallerySlideshow } from "./GallerySlideshow";
 
 function Table({ data }) {
     let headers = data.headers.map((header, index) => (
@@ -119,6 +120,7 @@ const components = {
     ImageCarousel,
     ChallengeCard,
     SolutionCard,
+    GallerySlideshow,
 };
 
 export function CustomMDX({ source }) {

@@ -9,4 +9,16 @@ module.exports = {
         extend: {},
     },
     plugins: [],
+    variants: {
+        extend: {},
+    },
+    utilities: {
+        ".scrollbar-hide": {
+            "-ms-overflow-style": "none",
+            "scrollbar-width": "none",
+            "&::-webkit-scrollbar": {
+                display: "none",
+            },
+        },
+    },
 };

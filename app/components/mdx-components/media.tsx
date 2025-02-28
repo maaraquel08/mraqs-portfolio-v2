@@ -105,7 +105,7 @@ export function VideoBlock({ src, title, caption }: VideoBlockProps) {
         <>
             <figure className="my-8">
                 <div
-                    className="overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-700 min-h-[635px] cursor-pointer transition-transform hover:scale-[1.02]"
+                    className="relative w-full aspect-video min-h-[635px] overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-700 cursor-pointer transition-transform hover:scale-[1.02]"
                     onClick={handleVideoClick}
                 >
                     <video
