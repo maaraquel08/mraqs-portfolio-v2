@@ -1,0 +1,144 @@
+---
+title: "Daily Pulse: How are you feeling today?"
+publishedAt: "2023-02-01"
+summary: "A simple question that can gain powerful insights of Employees"
+---
+
+<ImageBlock
+    src="https://i.imgur.com/1NjJykA.png"
+    alt="Sprout UI Library Screenshot"
+    width={1200}
+    height={630}
+/>
+
+Our Wellness team set out on a mission to support employee mental health and well-being with a mood tracker called Daily Pulse. We initially launched web and mobile versions during the pandemic, but—plot twist—the data ended up in two separate repositories. This meant fragmented insights and a not-so-seamless experience.
+
+Now, our focus is on fixing the disconnect by unifying the data into a single source of truth. One repository, one consistent experience, and no more data chaos—because tracking moods should be therapeutic, not frustrating.
+
+## Problem
+
+<ImageCarousel
+    images={[
+        {
+            src: "https://i.imgur.com/UtT8WJ2.png",
+            alt: "daily-pulse-mobile UI Library Screenshot 1",
+        },
+        {
+            src: "https://i.imgur.com/5vfQepv.png",
+            alt: "daily-pulse-web UI Library Screenshot 3",
+        },
+        {
+            src: "https://i.imgur.com/HlUkptt.png",
+            alt: "daily-pulse-report UI Library Screenshot 3",
+        },
+    ]}
+/>
+
+The previous designs for Daily Pulse had a little… identity crisis. The mobile version used a 6-point scale, while the web version stuck with 5 points. The result? Confusion, inconsistency, and questionable data accuracy. By aligning both platforms under a unified system, we’re making sure mood tracking stays insightful—not another source of stress.
+
+## Painpoints of the Users
+
+<div className="flex flex-col gap-4 mt-4">
+    <ChallengeCard
+        number={1}
+        title="Inconsistent Data Tracking"
+        description="Users expected a seamless mood-tracking experience but instead got two disconnected data sources—one for web, one for mobile. This made it impossible to get a comprehensive view of their emotional trends over time."
+    />
+    <ChallengeCard
+        number={2}
+        title="Inefficient use of time"
+        description="Manually piecing together mood data from two platforms? Not exactly the stress-free experience we aimed for. Instead of quick insights, users had to waste time reconciling their own data, which kind of defeats the whole purpose."
+    />
+    <ChallengeCard
+        number={3}
+        title="Lack of trust in the data"
+        description="With two repositories, which one is the real MVP? Users were left questioning the accuracy of their own data, making them less confident in the tool’s reliability."
+    />
+    <ChallengeCard
+        number={4}
+        title="Limited insights"
+        description="By keeping web and mobile data separate, we missed out on deeper patterns and trends. A unified system would allow users to see the full picture rather than just scattered puzzle pieces."
+    />
+    <ChallengeCard
+        number={5}
+        title="Lower motivation to use the tool"
+        description="A mood tracker that isn’t intuitive or reliable is one people won’t use. If the experience feels broken, users are less likely to engage, and the tool loses its impact altogether."
+    />
+</div>
+
+# HOW MIGHT WE? How might we establish a clear source of truth for the data collected from both platforms to ensure users have confidence in the accuracy of the data?
+
+## Solutions: Why We Chose the 5-Point Likert Scale
+
+While 6-point and 7-point scales have their place in research, we went with the classic 5-point Likert scale—and for good reason.
+
+<div className="flex flex-col gap-4 mt-4">
+    <SolutionCard
+        number={1}
+        title=" Simplicity Wins"
+        description="Users don’t want to overthink their mood rating. A 5-point scale is straightforward, familiar, and requires less cognitive effort, making it more likely that they’ll complete the survey and provide accurate responses."
+    />
+    <SolutionCard
+        number={2}
+        title=" The Neutral Middle Ground"
+        description="We wanted to capture a balanced perspective, which is why having a midpoint was crucial. Instead of labeling emotions (which can be subjective and non-linear), we used a simple numerical scale (1 to 5), letting users rate their day without overcomplicating things."
+    />
+    <SolutionCard
+        number={3}
+        title="Recognizing Limitations"
+        description="Let’s be real—measuring emotions is never 100% precise. Different users may interpret the scale differently, and no numerical system can fully capture the complexity of human mood."
+    />
+    <SolutionCard
+        number={4}
+        title="Beyond the Numbers"
+        description="A Likert scale is great, but numbers alone don’t tell the full story. To truly understand users' experiences, qualitative insights—like open-ended questions or interviews—can help paint a more complete picture."
+    />
+</div>
+
+## Study 1
+
+<VideoBlock
+    src="https://i.imgur.com/ecoYioq.mp4"
+    alt="daily-pulse"
+    classname="h-[635px]"
+/>
+
+Our initial study showed improved user engagement and satisfaction, but team feedback raised concerns about long-term usability. The button hit box might be too small, making interactions frustrating, and some users struggled with slider accuracy, leading to imprecise data. To ensure a seamless experience, we need to refine these elements by improving accessibility and interaction precision, ensuring the design remains intuitive and reliable over time.
+
+## Study 2
+
+<ImageBlock
+    src="https://i.imgur.com/uClaXT1.png"
+    alt="Sprout UI Library Screenshot"
+    width={1200}
+    height={630}
+/>
+
+In Study 2, we streamlined the user flow for simplicity, but presenting too much information at once led to cognitive overload for some users. This overwhelmed feeling could result in imprecise data, highlighting the need to balance clarity and information density to ensure a smooth, accurate user experience.
+
+## Study 3
+
+<ImageBlock
+    src="https://i.imgur.com/AzcI7fh.png"
+    alt="Sprout UI Library Screenshot"
+    width={1200}
+    height={630}
+/>
+
+In Study 3, we placed the daily mood tracker on the app dashboard, making it optional and visible upon opening the app. While this unorthodox approach was intriguing, it failed to align with users’ habits, as they preferred logging their mood after clocking out. This highlights the need to reassess our strategy to better match user behavior and goals.
+
+## Final Iteration
+
+<VideoBlock src="https://i.imgur.com/oBAISLb.mp4" alt="daily-pulse" />
+
+In the final design, we displayed a single emotion per screen to minimize cognitive effort and used a neutral emoji by default to prevent bias. To enhance usability, we replaced drag interactions with simple buttons, ensuring a seamless and efficient experience without adding complexity or increasing task completion time.
+
+## Possible Iterations
+
+1. Increase user engagement: Explore alternatives to drag interactions, such as gamification or personalized features, to encourage users to interact with the mood tracker more frequently.
+
+2. Monitor data usage: Regularly analyze collected data to identify trends and insights into employees' emotions, ensuring the tracker meets their well-being needs.
+
+3. Conduct user interviews: Gather direct feedback on how users interact with the mood tracker, uncovering pain points and areas for improvement.
+
+4. Usability testing: Observe users as they engage with the tracker to identify usability issues, confusing features, or functionality gaps, leading to a more user-friendly and effective design.
