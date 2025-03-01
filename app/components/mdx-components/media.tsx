@@ -10,6 +10,7 @@ interface ImageBlockProps {
     width?: number;
     height?: number;
     caption?: string;
+    containerHeight?: string;
 }
 
 interface VideoBlockProps {
@@ -24,6 +25,7 @@ export function ImageBlock({
     width = 1200,
     height = 630,
     caption,
+    containerHeight = "500px",
 }: ImageBlockProps) {
     const [isZoomed, setIsZoomed] = useState(false);
 
@@ -35,21 +37,42 @@ export function ImageBlock({
         setIsZoomed(false);
     };
 
+    // Handle height value with or without units
+    const getHeightValue = (height: string) => {
+        if (typeof height === "number" || !isNaN(Number(height))) {
+            return `${height}px`;
+        }
+        return height;
+    };
+
+    // Calculate aspect ratio for responsive sizing
+    const aspectRatio = (height / width) * 100;
+
     return (
         <>
-            <figure className="my-8">
+            <figure className="my-4 md:my-8 w-full">
                 <div
-                    className="overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-700 cursor-pointer transition-transform hover:scale-[1.02]"
+                    className="overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-700 cursor-pointer transition-transform hover:scale-[1.02] w-full bg-neutral-50 dark:bg-neutral-900"
                     onClick={handleImageClick}
                 >
-                    <Image
-                        src={src}
-                        alt={alt}
-                        width={width}
-                        height={height}
-                        className="w-full h-auto"
-                        priority
-                    />
+                    <div
+                        className="relative w-full"
+                        style={{
+                            height: `min(${getHeightValue(
+                                containerHeight
+                            )}, calc(100vw * ${aspectRatio / 100}))`,
+                            maxHeight: getHeightValue(containerHeight),
+                        }}
+                    >
+                        <Image
+                            src={src}
+                            alt={alt}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
+                            priority
+                        />
+                    </div>
                 </div>
                 {caption && (
                     <figcaption className="mt-2 text-sm text-center text-neutral-600 dark:text-neutral-400">
@@ -61,25 +84,23 @@ export function ImageBlock({
             {/* Zoom Modal */}
             {isZoomed && (
                 <div
-                    className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center"
+                    className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-2 md:p-4"
                     onClick={handleClose}
                 >
-                    <div className="relative w-full max-w-7xl mx-4">
+                    <div className="relative w-full max-w-7xl mx-auto">
                         <button
                             onClick={handleClose}
-                            className="absolute -top-12 right-0 p-2 text-white hover:text-neutral-300 transition-colors"
+                            className="absolute -top-8 md:-top-12 right-0 p-2 text-white hover:text-neutral-300 transition-colors"
                         >
                             <X className="w-6 h-6" />
                         </button>
-                        <div
-                            className="relative aspect-video"
-                            onClick={(e) => e.stopPropagation()}
-                        >
+                        <div className="relative w-full h-[80vh] md:h-[90vh]">
                             <Image
                                 src={src}
                                 alt={alt}
                                 fill
                                 className="object-contain"
+                                sizes="100vw"
                                 priority
                             />
                         </div>
