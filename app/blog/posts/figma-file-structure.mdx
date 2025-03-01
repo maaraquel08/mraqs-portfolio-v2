@@ -1,0 +1,93 @@
+---
+title: "Figma File Structure"
+publishedAt: "2022-09-02"
+summary: "A Figma File Structure
+---
+
+import { ImageCarousel } from "@/app/components/ImageCarousel";
+import { ChallengeCard } from "@/app/components/ChallengeCard";
+import { SolutionCard } from "@/app/components/SolutionCard";
+
+<ImageBlock
+    src="https://i.imgur.com/KwZOERx.png"
+    alt="Figma-File Structure"
+    containerHeight="400"
+/>
+
+The first time I joined our team in Sprout, I noticed that our Figma files had all the structure of a toddler's toy box—everything was everywhere, but somehow, it still kind of worked. At first, I thought, "Hey, this is great! We have the freedom to organize files however we want, and each designer can tailor things to their specific product needs."
+
+That is, until I was assigned to another cross-functional product team.
+
+That's when reality hit me like a poorly named Figma layer. Jumping into another team's files felt like trying to decipher ancient hieroglyphics—except with more hidden components and missing assets. What started as "creative freedom" quickly turned into "where in the world is this button variant?" It was clear that without a structured and systematic approach to our Figma files, collaboration (and my sanity) was at risk.
+
+## Problem
+
+As a Product Designer transitioning to another product, I was genuinely excited—new product, new challenges, and of course, new learning opportunities. But with great responsibility comes… great confusion.
+
+The biggest challenge? Finding and tracking what's actually the TRUTH.
+
+Imagine stepping into a new product team and trying to figure out which version of the design is the most accurate. Is it the one labeled Final_V2? Or Final_Final_UseThisOne? Or maybe Final(ActuallyTheRealOne)\_V3? The chaos was real.
+
+Here are some prime examples of our Figma file pages that made me question my life choices:
+
+1. A page labeled Work in Progress… but last updated six months ago.
+2. Another page called Archive that somehow had the most recent designs.
+3. A Master Components file… with five duplicate versions of the same button.
+
+Moral of the story? Without a structured system, transitioning between products feels less like a smooth handoff and more like a scavenger hunt where the prize is your own sanity.
+
+## Solution
+
+<div className="flex flex-col gap-4 mt-4">
+    <SolutionCard
+        number={1}
+        title="Prefer Side Navigation"
+        description="Users prefer a structured sidebar navigation system with a clear chronological order. Whether it's top-to-bottom or bottom-to-top doesn't matter as long as it's well-labeled."
+    />
+    <SolutionCard
+        number={2}
+        title="Importance of Research"
+        description="PMs and designers need a dedicated space to track and access all research materials, ensuring informed design decisions."
+    />
+    <SolutionCard
+        number={3}
+        title="Tracking History"
+        description="Users want visibility into the evolution of designs. Having a clear version history allows them to understand past iterations and trade-offs."
+    />
+    <SolutionCard
+        number={4}
+        title="Components"
+        description="Developers need a single source of truth for design components to ensure consistency and efficient coding."
+    />
+    <SolutionCard
+        number={5}
+        title="Motivation"
+        description="Developers and PMs prefer not to search for the correct Figma file manually. They want a clear system that indicates the final version to save time."
+    />
+</div>
+
+## Final File Structure
+
+```
+📁 Pages
+├── 📄 Project
+├── 📁 Final Designs / Handoff
+│   ├── 📑 Table of Contents
+│   ├── ✅ CTO Mobile
+│   ├── ✅ CTO Web
+│   └── 💎 Components
+│
+├── 📁 Design Work Files
+│   ├── 📑 Table of Contents
+│   ├── 🎨 [PRESENTATIONS] - CTO
+│   └── ✏️ Drafts
+│
+├── 📁 Research
+│   ├── 🧠 Research Drafts
+│   └── 🔄 User Flow
+│
+├── 📁 Usability Testing
+│   └── 📱 Prototype
+│
+└── 🗑️ Trash
+```

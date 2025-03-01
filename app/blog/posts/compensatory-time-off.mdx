@@ -1,0 +1,120 @@
+---
+title: "Compensatory Time Off: OT to Leaves"
+publishedAt: "2023-09-01"
+summary: "Employees can turn their overtimes into leaves."
+---
+
+<ImageBlock
+    src="https://i.imgur.com/6QKLnUQ.png"
+    alt="Sprout UI Library Screenshot"
+    containerHeight="400"
+/>
+
+<VideoBlock src="https://i.imgur.com/MAiw1Gb.mp4" alt="cto" />
+
+Many clients have requested a compensatory time off (CTO) feature that allows employees to convert their overtime hours into leave credits, subject to approval by their immediate supervisor. Additionally, clients need the flexibility to apply CTO on rest days and holidays. By implementing this feature, we can enhance user satisfaction, improve client retention, and create new opportunities to generate leads for the product.
+
+## User Goal
+
+_“I want to be able to apply for and manage my HR-related tasks, such as leave requests and attendance tracking, from both Sprout HR's web platform and mobile app with ease and convenience.”_
+
+_“I want to be able to convert my overtime hours into leave credits seamlessly, so that I can easily manage my work-life balance and take time off when needed without worrying about losing my earned hours.”_
+
+## Tech Constraints
+
+We're working with some wonderful constraints here—like an existing backend data structure that refuses to budge, legacy code in Sprout HR Web that treats UX changes like an unwelcome guest, and, of course, a team with limited resources trying to juggle it all. So, instead of dreaming of a perfect world where we can build freely, we'll get creative, work with what we've got, and somehow still deliver a seamless and valuable experience—because that's what we do best.
+
+## HMW make it easy for users to apply for CTO-OT requests across different platforms and devices, ensuring a seamless experience regardless of where they are?
+
+<ImageBlock
+    src="https://i.imgur.com/LMExM4t.png"
+    alt="CTO Time Mapping"
+    caption="Time and Attendance Mapping"
+    containerHeight="650"
+/>
+
+Our goal is to design a system that seamlessly converts overtime (OT) hours into leave credits while accounting for all possible scenarios and combinations. This means considering different company policies, approval processes, and edge cases—like whether the OT was logged on a weekday, rest day, or holiday, and how it aligns with existing leave balances.
+
+We also need to ensure flexibility for employees while maintaining proper validation and compliance. Can employees use CTO immediately? Should there be a minimum OT threshold before conversion? What happens if their request overlaps with a scheduled shift? These are just some of the fun (and slightly chaotic) questions we need to answer while making the experience smooth, intuitive, and fair for both employees and approvers.
+
+<GallerySlideshow
+    className="my-8"
+    images={[
+        {
+            src: "https://i.imgur.com/wej4MpB.png",
+            alt: "cto-frame-1",
+        },
+        {
+            src: "https://i.imgur.com/EThrqJV.png",
+            alt: "cto-frame-2",
+        },
+        {
+            src: "https://i.imgur.com/amNglM8.png",
+            alt: "cto-frame-3",
+        },
+        {
+            src: "https://i.imgur.com/vnUi7lz.png",
+            alt: "cto-frame-4",
+        },
+        {
+            src: "https://i.imgur.com/MzZ8fxG.png",
+            alt: "cto-frame-5",
+        },
+        {
+            src: "https://i.imgur.com/2j6CdCj.png",
+            alt: "cto-frame-6",
+        },
+        {
+            src: "https://i.imgur.com/zYBcZxk.png",
+            alt: "cto-frame-7",
+        },
+        {
+            src: "https://i.imgur.com/5EgnuvH.png",
+            alt: "cto-frame-8",
+        },
+        {
+            src: "https://i.imgur.com/Gz6oMYQ.png",
+            alt: "cto-frame-9",
+        },
+    ]}
+/>
+
+## Usability Testing
+
+After finalizing the initial designs, we put them to the test—literally. With the help of our UX Research team, which is me also, we recruited five participants for usability testing. After the sessions, we dove into affinity mapping, sorting through the chaos of data points and grouping insights accordingly. Once we had everything neatly categorized (or as neatly as real-world feedback allows), we built this matrix to visualize the recurring themes and problem areas. The goal? To cut through the noise and focus on solving the most pressing user challenges with clarity and precision.
+
+<ImageBlock
+    src="https://i.imgur.com/nMLyTWZ.png"
+    alt="usability testing matrix"
+    caption="UT Matrix"
+    containerHeight="620"
+/>
+
+<div className="flex flex-col gap-4 mt-4">
+    <SolutionCard
+        number={1}
+        title="User Onboarding & Product Tours"
+        description="Because let’s be real, if a feature feels like rocket science, users will abandon it faster than they abandon unread emails. A guided tour will help them get comfortable with new functionalities and (hopefully) encourage them to use the mobile app more."
+    />
+    <SolutionCard
+        number={2}
+        title="Proper Naming Conventions"
+        description="The HR industry takes its wording very seriously, and we don’t want to start any linguistic wars over misplaced and, or. Precision is key Here."
+    />
+    <SolutionCard
+        number={3}
+        title="Automated Calculation & Preview"
+        description="No one enjoys doing mental math, especially when it involves leave credits. A seamless, automated preview of CTO conversion will save users from unnecessary guesswork."
+    />
+    <SolutionCard
+        number={4}
+        title="Edge Case for Multiple OT Requests in One Day"
+        description="Because some people really love working overtime (or just have terrible luck with deadlines), we need to ensure the system can handle multiple OT applications smoothly."
+    />
+</div>
+
+## Samples
+
+<VideoBlock src="https://i.imgur.com/OLOwnNQ.mp4" alt="cto" />
+
+<VideoBlock src="https://i.imgur.com/UakQcXs.mp4" alt="cto" />
