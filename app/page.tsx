@@ -8,7 +8,7 @@ export default function Page() {
             <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
                 My Portfolio
             </h1>
-            <div className="h-[500px] w-full">
+            <div className="h-[500px] w-full pointer-events-none">
                 <SplineViewer url="https://prod.spline.design/OayK2citpuxtj5YZ/scene.splinecode" />
             </div>
             <AboutSection />
