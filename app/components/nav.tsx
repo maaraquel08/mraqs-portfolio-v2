@@ -9,6 +9,10 @@ const navItems = {
         name: "blog",
         external: false,
     },
+    "/showcase": {
+        name: "showcase",
+        external: false,
+    },
     "https://www.linkedin.com/in/maaraquel/": {
         name: "connect with me",
         external: true,

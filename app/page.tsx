@@ -1,6 +1,7 @@
 import { BlogPosts } from "app/components/posts";
 import SplineViewer from "./components/SplineViewer";
 import AboutSection from "./components/AboutSection";
+import { ShowcaseProjects } from "./components/showcase-projects";
 
 export default function Page() {
     return (
@@ -13,6 +14,15 @@ export default function Page() {
             </div>
             <AboutSection />
             <div className="my-8">
+                <h1 className="text-2xl font-semibold tracking-tighter mb-4">
+                    Showcase
+                </h1>
+                <ShowcaseProjects />
+            </div>
+            <div className="my-8">
+                <h1 className="text-2xl font-semibold tracking-tighter mb-4">
+                    Case Studies
+                </h1>
                 <BlogPosts />
             </div>
         </section>
