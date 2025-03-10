@@ -10,7 +10,7 @@ type CardProps = {
 
 function Card({ className, href, ...props }: CardProps) {
     const baseStyles =
-        "bg-card text-card-foreground flex flex-col rounded-xl border shadow-sm transition-all hover:shadow-md";
+        "bg-card text-card-foreground flex flex-col rounded-xl border border-gray-200 transition-all hover:shadow-sm";
 
     if (href) {
         return (
