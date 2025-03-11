@@ -1,9 +1,23 @@
 "use client";
 
 import { useState } from "react";
+import { useSound } from "../hooks/useSound";
 
 export default function AboutSection() {
     const [showMore, setShowMore] = useState(false);
+    const { playArpeggio } = useSound();
+
+    const handleClick = () => {
+        playArpeggio({
+            startFrequency: 400,
+            endFrequency: 1200,
+            noteCount: 8,
+            noteDuration: 25,
+            type: "sine",
+            volume: 0.05,
+        });
+        setShowMore(!showMore);
+    };
 
     return (
         <>
@@ -11,10 +25,10 @@ export default function AboutSection() {
                 {`Hey, I'm Michael! I design, I code, and I obsess over how everything in a product connects like a beautifully engineered puzzle (or at least, how it should). As a Design Engineer, I live in Figma and Cursor, constantly validating ideas before they spiral into overcomplicated chaos. My mission? Build great products—the kind that don't just look nice but actually make sense to use.`}
             </p>
             <p className="mb-4">
-                {`If you’re STILL reading this, either you’re genuinely interested, or you’re just waiting for a reason to click away. Either way, I appreciate the effort. But if you really want to dive into my nerdy obsessions… `}
+                {`If you're STILL reading this, either you're genuinely interested, or you're just waiting for a reason to click away. Either way, I appreciate the effort. But if you really want to dive into my nerdy obsessions… `}
                 <button
                     className="text-blue-500 underline cursor-pointer hover:text-blue-700 transition-colors"
-                    onClick={() => setShowMore(!showMore)}
+                    onClick={handleClick}
                 >
                     {showMore ? "Show Less" : "Click Here!"}
                 </button>
