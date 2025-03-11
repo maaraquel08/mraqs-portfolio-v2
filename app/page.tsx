@@ -13,18 +13,6 @@ export default function Page() {
                 <SplineViewer url="https://prod.spline.design/OayK2citpuxtj5YZ/scene.splinecode" />
             </div>
             <AboutSection />
-            <div className="my-8">
-                <h1 className="text-2xl font-semibold tracking-tighter mb-4">
-                    Showcase
-                </h1>
-                <ShowcaseProjects />
-            </div>
-            <div className="my-8">
-                <h1 className="text-2xl font-semibold tracking-tighter mb-4">
-                    Case Studies
-                </h1>
-                <BlogPosts />
-            </div>
         </section>
     );
 }
