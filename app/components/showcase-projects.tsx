@@ -10,20 +10,27 @@ interface Project {
 
 const projects: Project[] = [
     {
-        title: "Badyetly",
-        description:
-            "A platform for working people to track their finances better and achieve financial freedom.",
-        imageUrl: "https://i.imgur.com/HD6YPeQ.png",
-        imageAlt: "Badyetly - Financial Freedom Platform",
-        projectUrl: "https://badyetly-mics.vercel.app/accounts",
-    },
-    {
         title: "Reports Builder",
         description:
             "A feature rich reports builder for an HRIS and Payroll System.",
         imageUrl: "https://i.imgur.com/tMl5IH7.png",
         imageAlt: "Reports Builder",
         projectUrl: "https://reports-builder.vercel.app/",
+    },
+    {
+        title: "Referrly",
+        description: "The intelligent employee Referral and Rewards Platform",
+        imageUrl: "https://i.imgur.com/FpOE3B7.png",
+        imageAlt: "Referrly",
+        projectUrl: "https://www.referrly.co/",
+    },
+    {
+        title: "Badyetly",
+        description:
+            "A platform for working people to track their finances better and achieve financial freedom.",
+        imageUrl: "https://i.imgur.com/HD6YPeQ.png",
+        imageAlt: "Badyetly - Financial Freedom Platform",
+        projectUrl: "https://badyetly-mics.vercel.app/accounts",
     },
     {
         title: "Feliz Jewelry",
