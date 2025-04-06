@@ -28,6 +28,10 @@ export function useSound() {
 
         // Calculate frequencies for each note in the arpeggio
         const frequencies = Array.from({ length: noteCount }, (_, i) => {
+            // Handle division by zero when noteCount is 1
+            if (noteCount === 1) {
+                return startFrequency;
+            }
             const t = i / (noteCount - 1);
             return startFrequency + (endFrequency - startFrequency) * t;
         });

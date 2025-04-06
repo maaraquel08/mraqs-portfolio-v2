@@ -1,4 +1,11 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
+import { useSound } from "@/app/hooks/useSound";
+import { Button } from "@/app/components/ui/button";
+import { HamburgerMenuIcon, Cross1Icon } from "@radix-ui/react-icons";
+import { KeyEsc } from "./keyEsc";
 
 const navItems = {
     "/": {
@@ -24,42 +31,132 @@ const navItems = {
 };
 
 export function Navbar() {
+    const { playArpeggio } = useSound();
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    function playClickSound() {
+        playArpeggio({
+            startFrequency: 1000,
+            noteCount: 1,
+            noteDuration: 16,
+            type: "sine",
+            volume: 0.1,
+        });
+    }
+
+    function handleNavClick() {
+        playClickSound();
+        setIsMobileMenuOpen(false);
+    }
+
+    function toggleMobileMenu() {
+        playClickSound();
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    }
+
+    function renderLinks(isMobile = false) {
+        return Object.entries(navItems).map(
+            ([path, { name, external }], index) => {
+                const baseClasses = `transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative py-1 m-1`;
+                const mobileBaseClasses = isMobile ? "text-lg py-2" : "";
+
+                const mobileAnimationClasses = isMobile
+                    ? `transition-all duration-300 ease-out ${
+                          isMobileMenuOpen
+                              ? "opacity-100 translate-y-0"
+                              : "opacity-0 translate-y-3"
+                      }`
+                    : "";
+                const mobileStyle = isMobile
+                    ? { transitionDelay: `${index * 75}ms` }
+                    : {};
+
+                const commonClasses = `${baseClasses} ${mobileBaseClasses} ${mobileAnimationClasses}`;
+
+                if (external) {
+                    return (
+                        <a
+                            key={path}
+                            href={path}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={handleNavClick}
+                            className={commonClasses}
+                            style={mobileStyle}
+                        >
+                            {name}
+                        </a>
+                    );
+                }
+                return (
+                    <Link
+                        key={path}
+                        href={path}
+                        onClick={handleNavClick}
+                        className={commonClasses}
+                        style={mobileStyle}
+                    >
+                        {name}
+                    </Link>
+                );
+            }
+        );
+    }
+
     return (
-        <aside className="-ml-[8px] mb-16 tracking-tight">
+        <aside className="mb-16 tracking-tight">
+            <div className="hidden md:block">
+                <KeyEsc context="fixed" />
+            </div>
+
             <div className="lg:sticky lg:top-20">
+                <div className="md:hidden flex justify-between items-center mb-4">
+                    <KeyEsc context="mobileHeader" />
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={toggleMobileMenu}
+                        aria-label="Toggle navigation menu"
+                    >
+                        <HamburgerMenuIcon className="h-5 w-5" />
+                    </Button>
+                </div>
+
                 <nav
-                    className="flex flex-row items-start relative px-0 pb-0 fade md:overflow-auto scroll-pr-6 md:relative"
-                    id="nav"
+                    className="hidden md:flex md:flex-row md:items-center md:justify-between relative px-0 pb-0 fade md:overflow-auto scroll-pr-6"
+                    id="desktop-nav"
                 >
-                    <div className="flex flex-row space-x-0 pr-10">
-                        {Object.entries(navItems).map(
-                            ([path, { name, external }]) => {
-                                if (external) {
-                                    return (
-                                        <a
-                                            key={path}
-                                            href={path}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative py-1 px-2 m-1"
-                                        >
-                                            {name}
-                                        </a>
-                                    );
-                                }
-                                return (
-                                    <Link
-                                        key={path}
-                                        href={path}
-                                        className="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative py-1 px-2 m-1"
-                                    >
-                                        {name}
-                                    </Link>
-                                );
-                            }
-                        )}
+                    <div className="flex flex-row space-x-0 pr-10 gap-4">
+                        {renderLinks(false)}
                     </div>
                 </nav>
+
+                <div
+                    className={`fixed inset-0 z-40 bg-white/95 dark:bg-black/95 backdrop-blur-sm flex flex-col items-center justify-center md:hidden transition-opacity duration-300 ease-in-out ${
+                        isMobileMenuOpen
+                            ? "opacity-100 pointer-events-auto"
+                            : "opacity-0 pointer-events-none"
+                    }`}
+                    id="mobile-menu"
+                    onClick={(e) => {
+                        if (e.target === e.currentTarget) toggleMobileMenu();
+                    }}
+                >
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={toggleMobileMenu}
+                        aria-label="Close navigation menu"
+                        className={`absolute top-4 right-4 z-50 transition-opacity duration-300 ease-in-out ${
+                            isMobileMenuOpen ? "opacity-100" : "opacity-0"
+                        }`}
+                    >
+                        <Cross1Icon className="h-5 w-5" />
+                    </Button>
+                    <nav className="flex flex-col items-center space-y-4">
+                        {renderLinks(true)}
+                    </nav>
+                </div>
             </div>
         </aside>
     );
