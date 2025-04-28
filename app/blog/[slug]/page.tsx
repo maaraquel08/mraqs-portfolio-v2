@@ -12,6 +12,35 @@ import { BlogPostNavigation } from "app/components/BlogPostNavigation";
 import Link from "next/link";
 import { Button } from "app/components/ui/button";
 import { CornerUpLeft } from "lucide-react";
+import DynamicPill from "app/components/ui/dynamic-pill/dynamic-pill";
+import rehypeSlug from "rehype-slug";
+import toc from "@jsdevtools/rehype-toc";
+
+// Helper function to format seconds into MM:SS
+function formatTime(totalSeconds: number): string {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = Math.floor(totalSeconds % 60);
+    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(
+        2,
+        "0"
+    )}`;
+}
+
+// Helper function to estimate reading time
+function calculateReadingTime(content: string): string {
+    if (!content) return "00:00";
+    const wordsPerMinute = 200;
+    const text = content.replace(/<[^>]*>/g, ""); // Basic HTML tag removal
+    const wordCount = text.split(/\s+/).filter(Boolean).length;
+    const minutes = wordCount / wordsPerMinute;
+    const totalSeconds = minutes * 60;
+    return formatTime(totalSeconds);
+}
+
+interface Section {
+    id: string;
+    text: string;
+}
 
 interface PageParams {
     slug: string;
@@ -93,12 +122,50 @@ export default async function Blog({ params }: BlogPageProps) {
     const previousPost: Post | undefined = sortedPosts[currentPostIndex + 1];
     const nextPost: Post | undefined = sortedPosts[currentPostIndex - 1];
 
+    let tableOfContents: any[] = [];
+
     const mdxSource = await serialize(post.content, {
-        // Add parseFrontmatter: false if frontmatter is already parsed
-        // parseFrontmatter: false,
-        // Add any MDX options if needed
-        // mdxOptions: { remarkPlugins: [], rehypePlugins: [] },
+        mdxOptions: {
+            rehypePlugins: [
+                rehypeSlug,
+                [
+                    toc,
+                    {
+                        headings: ["h2", "h3"],
+                        customizeTOC: (tocResult) => {
+                            tableOfContents =
+                                tocResult?.children?.[0]?.children || [];
+                            return false;
+                        },
+                    },
+                ],
+            ],
+        },
     });
+
+    const sections: Section[] = tableOfContents
+        .map((item: any, index: number): Section | null => {
+            const linkElement = item?.children?.[0];
+            if (linkElement?.tagName !== "a") return null;
+
+            const text =
+                linkElement?.children?.[0]?.value || "Untitled Section";
+            const href = linkElement?.properties?.href;
+            const id = href?.startsWith("#")
+                ? href.substring(1)
+                : `section-${index}`;
+
+            if (text === "Untitled Section" || !href) return null;
+
+            return {
+                id: id,
+                text: text,
+            };
+        })
+        .filter((item): item is Section => item !== null);
+
+    // Calculate total reading time
+    const totalTime = calculateReadingTime(post.content);
 
     const jsonLd = {
         "@context": "https://schema.org",
@@ -144,7 +211,10 @@ export default async function Blog({ params }: BlogPageProps) {
                     {formatDate(post.metadata.publishedAt)}
                 </time>
             </div>
-            <article className="prose prose-neutral dark:prose-invert max-w-none lg:prose-lg">
+            <article
+                className="prose prose-neutral dark:prose-invert max-w-none lg:prose-lg"
+                id="blog-content-article"
+            >
                 <CustomMDX source={mdxSource} />
             </article>
 
@@ -165,6 +235,13 @@ export default async function Blog({ params }: BlogPageProps) {
                           }
                         : undefined
                 }
+            />
+            <DynamicPill
+                className="fixed bottom-8 left-1/2 -translate-x-1/2"
+                title={post.metadata.title}
+                author="Michael Anthony Raquel"
+                sections={sections}
+                totalTime={totalTime}
             />
         </section>
     );
