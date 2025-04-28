@@ -25,7 +25,7 @@ function HeaderButton({ children, className, ...props }: HeaderButtonProps) {
         <button
             type="button"
             className={cn(
-                "inline-flex h-8 items-center justify-center rounded-md border border-gray-300 bg-background px-2 py-1 text-sm font-medium transition-colors hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+                "inline-flex h-8 items-center justify-center rounded-md border border-gray-300 dark:border-neutral-700 bg-background px-2 py-1 text-sm font-medium transition-colors hover:bg-gray-100 dark:hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
                 className
             )}
             {...props}
@@ -133,6 +133,33 @@ export function DatePicker({
     }, [selected]);
 
     const handleDateClick = (date: Date) => {
+        const selectedMonth = date.getMonth();
+        const selectedYear = date.getFullYear();
+        const currentViewMonth = currentDate.getMonth();
+        const currentViewYear = currentDate.getFullYear();
+
+        // Check if the selected date is outside the currently displayed month/year
+        if (
+            selectedYear !== currentViewYear ||
+            selectedMonth !== currentViewMonth
+        ) {
+            // Determine direction for animation
+            const direction =
+                selectedYear > currentViewYear ||
+                (selectedYear === currentViewYear &&
+                    selectedMonth > currentViewMonth)
+                    ? "next" // Selected date is in the future relative to current view
+                    : "prev"; // Selected date is in the past relative to current view
+
+            setDirection(direction === "prev" ? "right" : "left"); // Set animation direction based on time travel
+            setIsViewTransition(false); // This is a navigation, not a view mode change
+
+            // Update the current view to the month/year of the selected date
+            // Use a new Date object to avoid mutating the original selected date
+            setCurrentDate(new Date(selectedYear, selectedMonth, 1));
+        }
+
+        // Select the date and call the callback
         setSelectedDate(date);
         onSelect?.(date);
     };
@@ -207,7 +234,7 @@ export function DatePicker({
 
     const toggleYearView = () => {
         setIsViewTransition(true);
-        setViewMode(viewMode === "years" ? "months" : "years");
+        setViewMode(viewMode === "years" ? "days" : "years");
     };
 
     const handleTodayClick = () => {
@@ -254,11 +281,11 @@ export function DatePicker({
     return (
         <div
             className={cn(
-                "w-full rounded-lg border border-gray-300 overflow-hidden bg-white",
+                "w-full rounded-lg border border-gray-300 dark:border-neutral-700 overflow-hidden",
                 className
             )}
         >
-            <div className="flex items-center justify-between px-3 py-2 border-b border-gray-300">
+            <div className="flex items-center justify-between px-3 py-2 border-b border-gray-300 dark:border-neutral-700">
                 <div className="flex items-center space-x-2">
                     <HeaderButton type="button" onClick={toggleMonthView}>
                         {currentDate.toLocaleString("default", {
@@ -372,10 +399,12 @@ export function DatePicker({
                                             "h-full w-full p-0 font-normal flex items-center justify-center rounded-md transition-colors duration-200 relative",
                                         ];
                                         if (isSelected) {
-                                            buttonClasses.push("bg-green-600"); // Selected background
+                                            buttonClasses.push(
+                                                "bg-green-600 text-white"
+                                            ); // Selected background & text (white contrasts well)
                                         } else {
                                             buttonClasses.push(
-                                                "hover:bg-gray-100"
+                                                "hover:bg-gray-100 dark:hover:bg-neutral-800"
                                             ); // Hover effect for non-selected
                                         }
 
@@ -401,9 +430,8 @@ export function DatePicker({
                                                 type="button"
                                                 className={cn(buttonClasses)} // Apply computed button classes
                                                 onClick={() =>
-                                                    currentMonth &&
                                                     handleDateClick(date)
-                                                } // Only allow clicks on current month days
+                                                } // Always handle click
                                                 aria-selected={isSelected}
                                                 aria-label={date.toDateString()}
                                                 tabIndex={currentMonth ? 0 : -1} // Improve keyboard navigation
@@ -434,10 +462,10 @@ export function DatePicker({
                                         key={month.value}
                                         type="button"
                                         className={cn(
-                                            "flex items-center justify-center rounded-lg border border-gray-300 text-center transition-all duration-200",
+                                            "flex items-center justify-center rounded-lg border border-gray-300 dark:border-neutral-700 text-center transition-all duration-200",
                                             currentMonth === month.value
                                                 ? "bg-green-600 text-white"
-                                                : "hover:bg-gray-100",
+                                                : "hover:bg-gray-100 dark:hover:bg-neutral-800",
                                             isCurrentYear &&
                                                 today.getMonth() ===
                                                     month.value &&
@@ -463,14 +491,13 @@ export function DatePicker({
                                         key={year}
                                         type="button"
                                         className={cn(
-                                            "flex items-center justify-center rounded-lg border border-gray-300 text-center transition-all duration-200",
-                                            currentYear === year &&
-                                                "bg-green-600 text-white",
+                                            "flex items-center justify-center rounded-lg border border-gray-300 dark:border-neutral-700 text-center transition-all duration-200",
+                                            currentYear === year
+                                                ? "bg-green-600 text-white"
+                                                : "hover:bg-gray-100 dark:hover:bg-neutral-800",
                                             today.getFullYear() === year &&
                                                 !(currentYear === year) &&
-                                                "border-green-600",
-                                            currentYear !== year &&
-                                                "hover:bg-gray-100"
+                                                "border-green-600"
                                         )}
                                         onClick={() => handleYearClick(year)}
                                     >

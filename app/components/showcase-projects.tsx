@@ -141,7 +141,7 @@ function ProjectCard({ project }: { project: Project }) {
                 <span className="text-md text-muted-foreground">
                     {project.date}
                 </span>
-                <p className="text-black text-md mt-2 flex-grow">
+                <p className="text-foreground text-md mt-2 flex-grow">
                     {project.description}
                 </p>
             </div>
