@@ -198,7 +198,7 @@ function DynamicPill({
     return (
         <div
             className={cn(
-                "bg-[rgba(17,15,15,0.95)] flex flex-col items-stretch rounded-3xl backdrop-blur-xl overflow-hidden min-w-[400px] p-4",
+                "bg-[rgba(17,15,15,0.95)] flex flex-col items-stretch rounded-3xl backdrop-blur-xl overflow-hidden p-4 w-full sm:w-auto min-w-[280px] max-w-[360px]",
                 className
             )}
         >
