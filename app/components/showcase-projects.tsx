@@ -1,6 +1,8 @@
 import { Card, CardHeader, CardTitle, CardContent, CardImage } from "./ui/card";
 import Link from "next/link";
 
+type Category = "Component" | "Mobile App" | "Website" | "Web App";
+
 interface Project {
     title: string;
     description: string;
@@ -9,6 +11,7 @@ interface Project {
     imageAlt: string;
     projectUrl: string;
     date: string;
+    category: Category;
     isInternal?: boolean;
     slug?: string;
 }
@@ -29,6 +32,7 @@ const projects: Project[] = [
         imageAlt: "Reports Builder",
         projectUrl: "https://reports-builder.vercel.app/",
         date: "March 2025",
+        category: "Web App" as const,
     },
     {
         title: "Referrly",
@@ -38,6 +42,7 @@ const projects: Project[] = [
         imageAlt: "Referrly",
         projectUrl: "https://www.referrly.co/",
         date: "November 2023",
+        category: "Web App" as const,
     },
     {
         title: "Badyetly",
@@ -48,6 +53,7 @@ const projects: Project[] = [
         imageAlt: "Badyetly - Financial Freedom Platform",
         projectUrl: "https://badyetly-mics.vercel.app/accounts",
         date: "January 2025",
+        category: "Web App" as const,
     },
     {
         title: "Feliz Jewelry",
@@ -58,30 +64,52 @@ const projects: Project[] = [
         imageAlt: "Feliz Jewelry",
         projectUrl: "https://feliz-jewelry.vercel.app/",
         date: "February 2025",
+        category: "Website" as const,
     },
     {
         title: "Datepicker",
-        description: "A nice react datepicker",
+        description: "A nice react datepicker.",
         assetUrl: "https://i.imgur.com/D9Xl4mY.mp4",
         assetType: "video" as const,
         imageAlt: "React Datepicker",
         projectUrl: "/showcase/datepicker",
         date: "April 2025",
+        category: "Component" as const,
         isInternal: true,
         slug: "datepicker",
+    },
+    {
+        title: "Dynamic Drawer",
+        description: "A newly improved interaction for nested drawers.",
+        assetUrl: "https://i.imgur.com/j3GWMnX.png",
+        assetType: "image" as const,
+        imageAlt: "Dynamic Drawer",
+        projectUrl: "/showcase/drawer",
+        date: "May 2025",
+        category: "Component" as const,
+        isInternal: true,
+        slug: "drawer",
     },
 
     // Add more projects here as needed
 ].sort((a, b) => parseDate(b.date).getTime() - parseDate(a.date).getTime());
 
+// Category color mapping for chips
+const categoryColors: Record<Category, string> = {
+    Component: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
+    "Mobile App":
+        "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
+    Website:
+        "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200",
+    "Web App":
+        "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
+};
+
 export function ShowcaseProjects() {
     return (
-        <div className="grid grid-cols-1 gap-4">
+        <div className="columns-1 sm:columns-2 lg:columns-2 xl:columns-2 2xl:columns-3 gap-6 space-y-0">
             {projects.map((project, index) => (
-                <div
-                    key={index}
-                    className="w-full flex-grow basis-full md:basis-[calc(50%-0.5rem)]"
-                >
+                <div key={index} className="break-inside-avoid mb-6">
                     {project.isInternal ? (
                         <Link
                             href={project.projectUrl}
@@ -135,13 +163,22 @@ function ProjectCard({ project }: { project: Project }) {
             </div>
             <div className="border-t border-gray-200" />
             <div className="p-4 flex flex-col flex-grow">
-                <h3 className="text-lg font-semibold text-foreground">
-                    {project.title}
-                </h3>
-                <span className="text-md text-muted-foreground">
+                <div className="flex items-start justify-between gap-2 mb-2">
+                    <h3 className="text-lg font-semibold text-foreground flex-1">
+                        {project.title}
+                    </h3>
+                    <span
+                        className={`px-2 py-1 text-xs font-medium rounded-full whitespace-nowrap ${
+                            categoryColors[project.category]
+                        }`}
+                    >
+                        {project.category}
+                    </span>
+                </div>
+                <span className="text-md text-muted-foreground mb-2">
                     {project.date}
                 </span>
-                <p className="text-foreground text-md mt-2 flex-grow">
+                <p className="text-foreground text-md flex-grow">
                     {project.description}
                 </p>
             </div>

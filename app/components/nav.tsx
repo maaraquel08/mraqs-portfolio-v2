@@ -57,7 +57,7 @@ export function Navbar() {
     function renderLinks(isMobile = false) {
         return Object.entries(navItems).map(
             ([path, { name, external }], index) => {
-                const baseClasses = `transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative py-1 m-1`;
+                const baseClasses = `transition-all px-3 border-r border-gray-200 last:border-r-0 hover:text-neutral-800 dark:hover:text-neutral-200 flex relative py-2`;
                 const mobileBaseClasses = isMobile ? "text-lg py-2" : "";
 
                 const mobileAnimationClasses = isMobile
@@ -123,10 +123,10 @@ export function Navbar() {
                 </div>
 
                 <nav
-                    className="hidden md:flex md:flex-row md:items-center md:justify-between relative px-0 pb-0 fade md:overflow-auto scroll-pr-6"
+                    className="hidden md:flex md:flex-row md:items-center relative px-0 pb-0 fade md:overflow-auto scroll-pr-6"
                     id="desktop-nav"
                 >
-                    <div className="flex flex-row space-x-0 pr-10 gap-4">
+                    <div className="flex flex-row bg-white/80 dark:bg-black/80 backdrop-blur-md border border-gray-200 rounded-lg shadow-lg">
                         {renderLinks(false)}
                     </div>
                 </nav>
