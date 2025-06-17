@@ -1,24 +1,68 @@
 import { notFound } from "next/navigation";
 import { CustomMDX } from "app/components/mdx";
-import { formatDate, getBlogPosts } from "app/blog/utils";
+import {
+    formatDate,
+    getSortedBlogPosts,
+    getPostBySlug,
+    Post,
+} from "app/blog/utils";
 import { baseUrl } from "app/sitemap";
 import { serialize } from "next-mdx-remote/serialize";
+import { BlogPostNavigation } from "app/components/BlogPostNavigation";
+import Link from "next/link";
+import { Button } from "app/components/ui/button";
+import { CornerUpLeft } from "lucide-react";
+import DynamicPill from "app/components/ui/dynamic-pill/dynamic-pill";
+import rehypeSlug from "rehype-slug";
+import toc from "@jsdevtools/rehype-toc";
 
-export async function generateStaticParams() {
-    const posts = await getBlogPosts();
-    return posts.map((post) => ({
+// Helper function to format seconds into MM:SS
+function formatTime(totalSeconds: number): string {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = Math.floor(totalSeconds % 60);
+    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(
+        2,
+        "0"
+    )}`;
+}
+
+// Helper function to estimate reading time
+function calculateReadingTime(content: string): string {
+    if (!content) return "00:00";
+    const wordsPerMinute = 200;
+    const text = content.replace(/<[^>]*>/g, ""); // Basic HTML tag removal
+    const wordCount = text.split(/\s+/).filter(Boolean).length;
+    const minutes = wordCount / wordsPerMinute;
+    const totalSeconds = minutes * 60;
+    return formatTime(totalSeconds);
+}
+
+interface Section {
+    id: string;
+    text: string;
+}
+
+interface PageParams {
+    slug: string;
+}
+
+interface GenerateMetadataParams {
+    params: PageParams;
+}
+
+interface BlogPageProps {
+    params: PageParams;
+}
+
+export async function generateStaticParams(): Promise<PageParams[]> {
+    const sortedPosts = getSortedBlogPosts();
+    return sortedPosts.map((post) => ({
         slug: post.slug,
     }));
 }
 
-export async function generateMetadata({
-    params,
-}: {
-    params: Promise<{ slug: string }> | { slug: string };
-}) {
-    const resolvedParams = await params;
-    const posts = await getBlogPosts();
-    const post = posts.find((post) => post.slug === resolvedParams.slug);
+export async function generateMetadata({ params }: GenerateMetadataParams) {
+    const post = getPostBySlug(params.slug);
 
     if (!post) {
         return {
@@ -46,7 +90,7 @@ export async function generateMetadata({
             description,
             type: "article",
             publishedTime,
-            url: `${baseUrl}/blog/${resolvedParams.slug}`,
+            url: `${baseUrl}/blog/${params.slug}`,
             images: [
                 {
                     url: ogImage,
@@ -62,21 +106,66 @@ export async function generateMetadata({
     };
 }
 
-export default async function Blog({ params }: { params: { slug: string } }) {
-    const posts = await getBlogPosts();
-    const post = posts.find((post) => post.slug === params.slug);
+export default async function Blog({ params }: BlogPageProps) {
+    const sortedPosts = getSortedBlogPosts();
 
-    if (!post) {
+    const currentPostIndex = sortedPosts.findIndex(
+        (p) => p.slug === params.slug
+    );
+
+    if (currentPostIndex === -1) {
         notFound();
     }
 
+    const post: Post = sortedPosts[currentPostIndex];
+
+    const previousPost: Post | undefined = sortedPosts[currentPostIndex + 1];
+    const nextPost: Post | undefined = sortedPosts[currentPostIndex - 1];
+
+    let tableOfContents: any[] = [];
+
     const mdxSource = await serialize(post.content, {
-        parseFrontmatter: true,
         mdxOptions: {
-            remarkPlugins: [],
-            rehypePlugins: [],
+            rehypePlugins: [
+                rehypeSlug,
+                [
+                    toc,
+                    {
+                        headings: ["h2", "h3"],
+                        customizeTOC: (tocResult) => {
+                            tableOfContents =
+                                tocResult?.children?.[0]?.children || [];
+                            return false;
+                        },
+                    },
+                ],
+            ],
         },
     });
+
+    const sections: Section[] = tableOfContents
+        .map((item: any, index: number): Section | null => {
+            const linkElement = item?.children?.[0];
+            if (linkElement?.tagName !== "a") return null;
+
+            const text =
+                linkElement?.children?.[0]?.value || "Untitled Section";
+            const href = linkElement?.properties?.href;
+            const id = href?.startsWith("#")
+                ? href.substring(1)
+                : `section-${index}`;
+
+            if (text === "Untitled Section" || !href) return null;
+
+            return {
+                id: id,
+                text: text,
+            };
+        })
+        .filter((item): item is Section => item !== null);
+
+    // Calculate total reading time
+    const totalTime = calculateReadingTime(post.content);
 
     const jsonLd = {
         "@context": "https://schema.org",
@@ -96,7 +185,17 @@ export default async function Blog({ params }: { params: { slug: string } }) {
     };
 
     return (
-        <section className="max-w-2xl mx-auto py-8">
+        <section>
+            <Link
+                href="/blog"
+                className="inline-block mb-6 text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+                aria-label="Back to Blog list"
+            >
+                <Button variant="ghost" size="sm">
+                    <CornerUpLeft className="mr-1 h-4 w-4" />
+                    Back to Blog
+                </Button>
+            </Link>
             <script
                 type="application/ld+json"
                 suppressHydrationWarning
@@ -104,17 +203,46 @@ export default async function Blog({ params }: { params: { slug: string } }) {
                     __html: JSON.stringify(jsonLd),
                 }}
             />
-            <h1 className="title font-semibold text-2xl tracking-tighter mb-4">
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 mb-2">
                 {post.metadata.title}
             </h1>
-            <div className="flex justify-between items-center mb-8 text-sm">
-                <p className="text-sm text-neutral-600 dark:text-neutral-400">
+            <div className="mb-8 text-sm text-neutral-600 dark:text-neutral-400">
+                <time dateTime={post.metadata.publishedAt}>
                     {formatDate(post.metadata.publishedAt)}
-                </p>
+                </time>
             </div>
-            <article className="prose dark:prose-invert max-w-none">
+            <article
+                className="prose prose-neutral dark:prose-invert max-w-none lg:prose-lg"
+                id="blog-content-article"
+            >
                 <CustomMDX source={mdxSource} />
             </article>
+
+            <BlogPostNavigation
+                previousPost={
+                    previousPost
+                        ? {
+                              slug: previousPost.slug,
+                              title: previousPost.metadata.title,
+                          }
+                        : undefined
+                }
+                nextPost={
+                    nextPost
+                        ? {
+                              slug: nextPost.slug,
+                              title: nextPost.metadata.title,
+                          }
+                        : undefined
+                }
+            />
+            <DynamicPill
+                className="fixed bottom-8 left-1/2 -translate-x-1/2"
+                title={post.metadata.title}
+                author="Michael Anthony Raquel"
+                sections={sections}
+                totalTime={totalTime}
+            />
         </section>
     );
 }

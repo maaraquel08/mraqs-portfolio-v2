@@ -15,6 +15,18 @@
     --sh-jsxliterals: #6266d1;
     --sh-property: #e25a1c;
     --sh-entity: #e25a1c;
+
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 215 20.2% 65.1%;
+
+    --radius: 0.5rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,6 +35,16 @@
         --sh-identifier: white;
         --sh-keyword: #f47067;
         --sh-string: #0fa295;
+
+        --background: 222.2 84% 4.9%;
+        --foreground: 210 40% 98%;
+
+        --muted: 217.2 32.6% 17.5%;
+        --muted-foreground: 215 20.2% 65.1%;
+
+        --border: 217.2 32.6% 17.5%;
+        --input: 217.2 32.6% 17.5%;
+        --ring: 212.7 26.8% 83.9%;
     }
     html {
         color-scheme: dark;
@@ -31,6 +53,7 @@
 
 html {
     min-width: 360px;
+    scroll-behavior: smooth;
 }
 
 .prose .anchor {
@@ -147,4 +170,21 @@ table {
 
 .title {
     text-wrap: balance;
+}
+
+/* Custom definition for text-muted-foreground */
+.text-muted-foreground {
+    @apply text-[hsl(var(--muted-foreground))];
+}
+
+/* Ensure dark mode also works if needed */
+@media (prefers-color-scheme: dark) {
+    /* ... existing dark mode :root variables ... */
+
+    .text-muted-foreground {
+        /* Use the dark mode variable value */
+        @apply text-[hsl(var(--muted-foreground))];
+        /* OR you could hardcode if variables aren't reliable */
+        /* @apply text-[hsl(215_20.2%_65.1%)]; */
+    }
 }
