@@ -58,7 +58,9 @@ export function Navbar() {
         return Object.entries(navItems).map(
             ([path, { name, external }], index) => {
                 const baseClasses = `transition-all px-3 border-r border-gray-200 last:border-r-0 hover:text-neutral-800 dark:hover:text-neutral-200 flex relative py-2`;
-                const mobileBaseClasses = isMobile ? "text-lg py-2" : "";
+                const mobileBaseClasses = isMobile
+                    ? "text-lg py-2 border-r-0"
+                    : "";
 
                 const mobileAnimationClasses = isMobile
                     ? `transition-all duration-300 ease-out ${
