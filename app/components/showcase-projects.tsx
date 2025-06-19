@@ -172,7 +172,7 @@ function ProjectCard({ project }: { project: Project }) {
             ".mkv",
             ".m4v",
         ];
-        return videoExtensions.some((ext) => url.toLowerCase().includes(ext));
+        return videoExtensions.some((ext) => url.toLowerCase().endsWith(ext));
     };
 
     // Determine if this should be rendered as video based on assetType or URL
