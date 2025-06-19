@@ -571,19 +571,12 @@ export default function DrawerPage() {
                             muted
                             playsInline
                             preload="metadata"
+                            src="https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Sidepanel-LxobKClvOvuo6sCu3fNNtU5AUqv5Nu.mov"
                             className="w-full h-auto object-cover"
                             style={{
                                 height: "auto",
                             }}
                         >
-                            <source
-                                src="https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Sidepanel-LxobKClvOvuo6sCu3fNNtU5AUqv5Nu.mov"
-                                type="video/quicktime"
-                            />
-                            <source
-                                src="https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Sidepanel-LxobKClvOvuo6sCu3fNNtU5AUqv5Nu.mov"
-                                type="video/mp4"
-                            />
                             Your browser does not support the video tag.
                         </video>
                     </div>

@@ -91,19 +91,12 @@ export default function ShiftCenterShowcase() {
                                         muted
                                         playsInline
                                         preload="metadata"
+                                        src={videoPrototype.src}
                                         className="w-full h-auto object-cover"
                                         style={{
                                             height: "auto",
                                         }}
                                     >
-                                        <source
-                                            src={videoPrototype.src}
-                                            type="video/quicktime"
-                                        />
-                                        <source
-                                            src={videoPrototype.src}
-                                            type="video/mp4"
-                                        />
                                         Your browser does not support the video
                                         tag.
                                     </video>

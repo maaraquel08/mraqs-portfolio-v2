@@ -190,13 +190,11 @@ function ProjectCard({ project }: { project: Project }) {
                         muted
                         playsInline
                         preload="metadata"
+                        src={project.assetUrl}
                         aria-label={project.imageAlt}
                         width={1280}
                         height={720}
                     >
-                        <source src={project.assetUrl} type="video/mp4" />
-                        <source src={project.assetUrl} type="video/quicktime" />
-                        <source src={project.assetUrl} type="video/webm" />
                         Your browser does not support the video tag.
                     </video>
                 ) : (
