@@ -27,13 +27,15 @@ const projects: Project[] = [
         title: "Reports Builder",
         description:
             "A feature rich reports builder for an HRIS and Payroll System.",
-        assetUrl: "https://i.imgur.com/tMl5IH7.png",
+        assetUrl:
+            "https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Reports%20Builder-V2JOPt9PeuRNwt10RCun2XVIJEsvS6.png",
         assetType: "image" as const,
         imageAlt: "Reports Builder",
         projectUrl: "https://reports-builder.vercel.app/",
         date: "March 2025",
         category: "Web App" as const,
     },
+
     {
         title: "Referrly",
         description: "The intelligent employee Referral and Rewards Platform",
@@ -90,6 +92,32 @@ const projects: Project[] = [
         isInternal: true,
         slug: "drawer",
     },
+    {
+        title: "Shift Center Module",
+        description:
+            "A comprehensive shift management system that allows users to create custom shifts and assign them to employees efficiently.",
+        assetUrl:
+            "https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Timeline%201-aUjxn0rKhHNHJwMdh9ygbwnkH7EjfO.mov",
+        assetType: "video" as const,
+        imageAlt: "Shift Center Module - Employee Shift Management",
+        projectUrl: "/showcase/shift-center",
+        date: "June 2025",
+        category: "Web App" as const,
+        isInternal: true,
+        slug: "shift-center",
+    },
+    {
+        title: "Sprout Design System",
+        description:
+            "A design system for a company that provides a set of guidelines for creating consistent and user-friendly interfaces. Made in Vue.",
+        assetUrl:
+            "https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Screenshot%202025-06-20%20at%2001.15.50-W9LgUlcj6h15a4QsqaZjurDHi4QqZm.png",
+        assetType: "image" as const,
+        imageAlt: "Sprout Design System",
+        projectUrl: "https://jolly-rock-0e7e9fa00.5.azurestaticapps.net/",
+        date: "June 2025",
+        category: "Component" as const,
+    },
 
     // Add more projects here as needed
 ].sort((a, b) => parseDate(b.date).getTime() - parseDate(a.date).getTime());
@@ -134,10 +162,42 @@ export function ShowcaseProjects() {
 }
 
 function ProjectCard({ project }: { project: Project }) {
+    // Helper function to detect if URL is a video based on file extension
+    const isVideoUrl = (url: string): boolean => {
+        const videoExtensions = [
+            ".mp4",
+            ".mov",
+            ".webm",
+            ".avi",
+            ".mkv",
+            ".m4v",
+        ];
+        return videoExtensions.some((ext) => url.toLowerCase().endsWith(ext));
+    };
+
+    // Determine if this should be rendered as video based on assetType or URL
+    const shouldRenderAsVideo =
+        project.assetType === "video" || isVideoUrl(project.assetUrl);
+
     return (
         <div className="w-full h-full overflow-hidden rounded-lg border border-gray-200 bg-card text-card-foreground flex flex-col group transition-shadow duration-200 ease-in-out hover:shadow-md">
             <div className="aspect-video overflow-hidden">
-                {project.assetType === "image" ? (
+                {shouldRenderAsVideo ? (
+                    <video
+                        className="w-full h-full object-cover"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        preload="metadata"
+                        src={project.assetUrl}
+                        aria-label={project.imageAlt}
+                        width={1280}
+                        height={720}
+                    >
+                        Your browser does not support the video tag.
+                    </video>
+                ) : (
                     <img
                         src={project.assetUrl}
                         alt={project.imageAlt}
@@ -145,20 +205,6 @@ function ProjectCard({ project }: { project: Project }) {
                         width={1280}
                         height={720}
                     />
-                ) : (
-                    <video
-                        src={project.assetUrl}
-                        className="w-full h-full object-cover"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        aria-label={project.imageAlt}
-                        width={1280}
-                        height={720}
-                    >
-                        Your browser does not support the video tag.
-                    </video>
                 )}
             </div>
             <div className="border-t border-gray-200" />

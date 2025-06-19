@@ -1,11 +1,12 @@
 "use client";
 
-import { FileText, X, ChevronRight } from "lucide-react";
+import { FileText, X, ChevronRight, CornerUpLeft } from "lucide-react";
 import { Dialog } from "@/app/components/ui/dialog";
 import { Button } from "@/app/components/ui/button";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence, MotionProps } from "motion/react";
+import Link from "next/link";
 
 // --- Constants ---
 
@@ -538,19 +539,71 @@ export default function DrawerPage() {
     };
 
     return (
-        <div>
-            <h1 className="text-2xl font-bold mb-6">Drawer Example</h1>
-
-            <div className="mb-8">
-                <p className="mb-4">Click the button to open the drawer.</p>
-                <Button
-                    variant="default"
-                    onClick={() => setIsDrawerOpen(true)}
-                    className="bg-gray-900 text-white"
-                    // Use standard variant="default", Shadcn handles dark mode
-                >
-                    Open Drawer
+        <section>
+            <Link href="/showcase" className="inline-block mb-8">
+                <Button variant="ghost">
+                    <CornerUpLeft className="mr-2 h-4 w-4" />
+                    Back to Showcase
                 </Button>
+            </Link>
+
+            <h1 className="font-semibold text-2xl mb-8 tracking-tighter">
+                Dynamic Side Panel Drawer
+            </h1>
+
+            <div className="space-y-12">
+                {/* Video Showcase Section */}
+                <div className="space-y-6">
+                    <div>
+                        <h2 className="text-xl font-medium mb-4">
+                            Real Use Cases
+                        </h2>
+                        <p className="text-muted-foreground mb-6">
+                            See the dynamic side panel drawer in action across
+                            different contexts and workflows.
+                        </p>
+                    </div>
+
+                    <div className="rounded-xl overflow-hidden shadow-lg">
+                        <video
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            preload="metadata"
+                            src="https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Sidepanel-LxobKClvOvuo6sCu3fNNtU5AUqv5Nu.mov"
+                            className="w-full h-auto object-cover"
+                            style={{
+                                height: "auto",
+                            }}
+                        >
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+
+                {/* Interactive Example Section */}
+                <div className="space-y-6">
+                    <div>
+                        <h2 className="text-xl font-medium mb-4">
+                            Interactive Example
+                        </h2>
+                        <p className="text-muted-foreground mb-6">
+                            Try the drawer component yourself with this
+                            interactive demo.
+                        </p>
+                    </div>
+
+                    <div className="mb-8">
+                        <Button
+                            variant="default"
+                            onClick={() => setIsDrawerOpen(true)}
+                            className="bg-gray-900 text-white"
+                        >
+                            Open Drawer
+                        </Button>
+                    </div>
+                </div>
             </div>
 
             {/* Render the DrawerComponent, passing necessary props and callbacks */}
@@ -560,6 +613,6 @@ export default function DrawerPage() {
                 onApplyItem={handleItemApply}
                 activeContext="this refactored example"
             />
-        </div>
+        </section>
     );
 }
