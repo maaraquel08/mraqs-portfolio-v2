@@ -57,7 +57,7 @@ export function Navbar() {
     function renderLinks(isMobile = false) {
         return Object.entries(navItems).map(
             ([path, { name, external }], index) => {
-                const baseClasses = `transition-all px-3 border-r border-gray-200 last:border-r-0 hover:text-neutral-800 dark:hover:text-neutral-200 flex relative py-2`;
+                const baseClasses = `transition-all px-3 border-r border-gray-200 dark:border-gray-800 last:border-r-0 hover:text-neutral-800 dark:hover:text-neutral-200 flex relative py-2`;
                 const mobileBaseClasses = isMobile
                     ? "text-lg py-2 border-r-0"
                     : "";
@@ -106,7 +106,7 @@ export function Navbar() {
     }
 
     return (
-        <aside className="mb-16 tracking-tight">
+        <aside className="mb-4 tracking-tight">
             <div className="hidden md:block">
                 <KeyEsc context="fixed" />
             </div>
@@ -128,7 +128,7 @@ export function Navbar() {
                     className="hidden md:flex md:flex-row md:items-center relative px-0 pb-0 fade md:overflow-auto scroll-pr-6"
                     id="desktop-nav"
                 >
-                    <div className="flex flex-row bg-white/80 dark:bg-black/80 backdrop-blur-md border border-gray-200 rounded-lg shadow-lg">
+                    <div className="flex flex-row bg-white/80 dark:bg-black/80 backdrop-blur-md border border-gray-200 dark:border-gray-800 rounded-lg shadow-lg">
                         {renderLinks(false)}
                     </div>
                 </nav>
