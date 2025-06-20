@@ -106,7 +106,7 @@ export function Navbar() {
     }
 
     return (
-        <aside className="mb-4 tracking-tight">
+        <aside className="mb-6 tracking-tight">
             <div className="hidden md:block">
                 <KeyEsc context="fixed" />
             </div>
