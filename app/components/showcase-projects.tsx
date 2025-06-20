@@ -180,7 +180,7 @@ function ProjectCard({ project }: { project: Project }) {
         project.assetType === "video" || isVideoUrl(project.assetUrl);
 
     return (
-        <div className="w-full h-full overflow-hidden rounded-lg border border-gray-200 bg-card text-card-foreground flex flex-col group transition-shadow duration-200 ease-in-out hover:shadow-md">
+        <div className="w-full h-full overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 bg-card text-card-foreground flex flex-col group transition-shadow duration-200 ease-in-out hover:shadow-md">
             <div className="aspect-video overflow-hidden">
                 {shouldRenderAsVideo ? (
                     <video
@@ -207,7 +207,7 @@ function ProjectCard({ project }: { project: Project }) {
                     />
                 )}
             </div>
-            <div className="border-t border-gray-200" />
+            <div className="border-t border-gray-200 dark:border-gray-700" />
             <div className="p-4 flex flex-col flex-grow">
                 <div className="flex items-start justify-between gap-2 mb-2">
                     <h3 className="text-lg font-semibold text-foreground flex-1">
