@@ -5,7 +5,7 @@ import {
     getSortedBlogPosts,
     getPostBySlug,
     Post,
-} from "app/blog/utils";
+} from "app/writings/utils";
 import { baseUrl } from "app/sitemap";
 import { serialize } from "next-mdx-remote/serialize";
 import { BlogPostNavigation } from "app/components/BlogPostNavigation";
@@ -90,7 +90,7 @@ export async function generateMetadata({ params }: GenerateMetadataParams) {
             description,
             type: "article",
             publishedTime,
-            url: `${baseUrl}/blog/${params.slug}`,
+            url: `${baseUrl}/writings/${params.slug}`,
             images: [
                 {
                     url: ogImage,
@@ -177,7 +177,7 @@ export default async function Blog({ params }: BlogPageProps) {
         image: post.metadata.image
             ? `${baseUrl}${post.metadata.image}`
             : `${baseUrl}/og?title=${encodeURIComponent(post.metadata.title)}`,
-        url: `${baseUrl}/blog/${params.slug}`,
+        url: `${baseUrl}/writings/${params.slug}`,
         author: {
             "@type": "Person",
             name: "My Portfolio",
@@ -187,13 +187,13 @@ export default async function Blog({ params }: BlogPageProps) {
     return (
         <section>
             <Link
-                href="/blog"
+                href="/writings"
                 className="inline-block mb-6 text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
-                aria-label="Back to Blog list"
+                aria-label="Back to Writings list"
             >
                 <Button variant="ghost" size="sm">
                     <CornerUpLeft className="mr-1 h-4 w-4" />
-                    Back to Blog
+                    Back to Writings
                 </Button>
             </Link>
             <script

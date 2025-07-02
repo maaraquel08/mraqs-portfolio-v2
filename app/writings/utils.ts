@@ -3,13 +3,14 @@ import path from "path";
 import { cache } from "react"; // Import Next.js cache
 
 // Define path constant
-const POSTS_PATH = path.join(process.cwd(), "app", "blog", "posts");
+const POSTS_PATH = path.join(process.cwd(), "app", "writings", "posts");
 
 interface PostMetadata {
     title: string;
     publishedAt: string;
     summary: string;
     image?: string;
+    type?: "blog" | "case-study";
 }
 
 export interface Post {
@@ -45,7 +46,23 @@ function parseFrontmatter(
                 .join(": ")
                 .trim()
                 .replace(/^['"](.*)['"]$/, "$1");
-            metadata[key.trim() as keyof PostMetadata] = value;
+
+            const trimmedKey = key.trim() as keyof PostMetadata;
+
+            // Handle type field validation
+            if (trimmedKey === "type") {
+                if (value === "blog" || value === "case-study") {
+                    metadata[trimmedKey] = value;
+                } else {
+                    console.warn(
+                        `Invalid type value "${value}" in file: ${path.basename(
+                            filePath
+                        )}. Using default.`
+                    );
+                }
+            } else {
+                metadata[trimmedKey] = value as any;
+            }
         }
     });
 
@@ -145,6 +162,23 @@ export function getSortedBlogPosts(): Post[] {
 // Function to get a single post by slug (uses cached getAllBlogPosts)
 export function getPostBySlug(slug: string): Post | undefined {
     return getAllBlogPosts().find((post) => post.slug === slug);
+}
+
+// Function to get posts filtered by type
+export function getPostsByType(type: "blog" | "case-study"): Post[] {
+    return getSortedBlogPosts().filter((post) => post.metadata.type === type);
+}
+
+// Function to get blog posts only (including posts without type specified)
+export function getBlogPosts(): Post[] {
+    return getSortedBlogPosts().filter(
+        (post) => !post.metadata.type || post.metadata.type === "blog"
+    );
+}
+
+// Function to get case study posts only
+export function getCaseStudyPosts(): Post[] {
+    return getPostsByType("case-study");
 }
 
 // Keep formatDate as is

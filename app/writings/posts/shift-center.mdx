@@ -1,0 +1,150 @@
+---
+title: "Shift Center"
+publishedAt: "2025-06-01"
+summary: "Admin can now manage their workforce schedule."
+type: "case-study"
+---
+
+<VideoBlock
+    src="https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Timeline%201-aUjxn0rKhHNHJwMdh9ygbwnkH7EjfO.mov"
+    alt="Interactive Calendar Prototype"
+/>
+# How Shift Management Almost Broke Our Admins (and What We Did About It)
+
+**You know it’s bad when your users start secretly building their own tools to avoid using yours.** That was the vibe we were getting from HR admins using our scheduling feature—if they were using it at all.
+
+Some would stay hours past their shift, wrestling with our clunky UI just to plan the next week. Others gave up entirely and built Frankenstein Excel sheets that made more sense _to them_ than our actual tool. Ouch. It was like buying a fancy treadmill and using it as a clothes rack.
+
+So, what was going on?
+
+---
+
+## The Problem: Workforce Planning, But Make It a Nightmare
+
+Imagine having to schedule 100+ employees across:
+
+-   Multiple companies
+-   Multiple work locations
+-   Multiple shift types (broken shifts, graveyard, “why-are-we-open-at-this-hour?” shifts)
+
+Now imagine doing that every. single. week.
+
+Admins were drowning. The tool wasn’t helping—it was dragging them down. Instead of simplifying their lives, it was making them say things like, “Let’s just use Google Sheets again.”
+
+As a team that proudly says we “make work life easier,” this was a hard pill to swallow.
+
+---
+
+## My Role: Lead Designer / Shift Therapist
+
+I took on the role of **lead designer and interaction designer** for the feature overhaul. But honestly? I felt more like a shift therapist.
+
+We kicked off with deep-dive interviews and ideation sessions with our clients. That’s where we started to hear things like:
+
+> “I’m doing OT just to fix the schedule every week.”  
+> “It’s easier if I don’t use your product.”
+
+(If that doesn’t make your inner designer soul shrivel up, I don’t know what will.)
+
+---
+
+## The Process: From Chaos to Enterprise-Ready Calm
+
+We didn’t want to just patch things up—we wanted to future-proof it. Make it _enterprise-proof_, even.
+
+So we asked ourselves:  
+**What if we stopped designing for one admin’s messy Tuesday—and started designing for an entire org’s scheduling philosophy?**
+
+That led us to three big design moves:
+
+### 1. **Think Reusable, Not Repetitive**
+
+Admins were creating the _same_ shifts again and again. Midnight-8 AM here, 2 PM-11 PM there—it was like déjà vu with extra clicks.
+
+So we thought:  
+**Why not let them build shifts once and reuse them everywhere?**  
+Not only that, but what if other admins could tap into those same pre-defined shifts too?
+
+Boom: **shared shift libraries.**  
+Create once, use forever. Or at least until someone retires.
+
+### 2. **Design for Modularity and Scale**
+
+We wanted to make scheduling feel like building with LEGO, not assembling IKEA furniture. So we focused on **modularity**: reusable components, scalable logic, and drag-and-drop ease that could adapt to everything from startups to 5,000-headcount enterprises.
+
+That’s where the idea of the **Shift Builder** came in—a centralized, intuitive way to build, name, and manage shifts like a pro.
+
+<ImageBlock
+    src="https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Shift%20Builder-1-HSte2raBIjn9liZ4nhPrWGoIJbcKy7.png"
+    alt="Shift Builder Interface Design"
+    caption="The Shift Builder interface"
+    containerHeight="550px"
+/>
+
+<ImageBlock
+    src="https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Shift%20Center-g6GmmpA7adV8NHiHVRnXOfeUuRVQxX.png"
+    alt="Shift Center Table"
+    caption="The Shift Libraries where admins can see all the created shifts."
+    containerHeight="500px"
+/>
+### 🧱 ASCII Shift Workflow: From Builder to Everyone
+
+```
++---------------+
+| SHIFT BUILDER | <-- Step 1: Create your custom shift types here.
++---------------+
+         |
+         v
++----------------------------+
+| ASSIGN SHIFTS TO EMPLOYEES | <-- Step 2: Use your saved shifts and apply in bulk.
++----------------------------+
+         |
+         v
++-----------------------------------------+
+|   SHIFTS SYNCED ACROSS ECOSYSTEM       |
+|   - Web App                            |
+|   - Mobile App                         |
+|   - User Profiles                      |
+|   - Team Calendars                     |
++-----------------------------------------+
+```
+
+The result?  
+Admins spend less time copy-pasting and more time actually managing. Plus, everyone—from managers to rank-and-file—gets shift visibility across all touchpoints.
+
+It’s one of those solutions that looks simple on the surface, but under the hood? It’s a beast built for scale.
+
+---
+
+## Key Moment: Designing for Scale, Not Just Screens
+
+Once we truly understood how overwhelming workforce planning was, we pivoted our design. We made bulk actions smarter. We made setup management way easier. And most importantly, we created an experience that could scale across a range of complex scenarios.
+
+Suddenly, the feature didn’t feel like a time sink. It felt like a time saver.
+
+Admins started to breathe again. (Some even smiled, I swear.)
+
+---
+
+## The “Oh Crap” Moment: We Designed It Backwards
+
+<ImageBlock
+    src="https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/cd33419e-1ffa-467a-8a9f-7361d0b0ce54-e8p3umPjfa4kJVNlD0yQnC17kE3GTV.png"
+    alt="Oh no"
+    caption="That's me."
+    containerHeight="500px"
+/>
+
+Here’s the twist: in our first version, we made it easy to assign **shifts to employees**—but not the other way around.
+
+Turns out, admins don’t think that way. They start with a shift (like a 9 PM–6 AM graveyard), and then figure out _who_ fits. Not the other way around.
+
+That was a big “oh crap” moment. But it was also a great opportunity to iterate.
+
+---
+
+## What I’d Do Differently
+
+Next time? I’d zoom out even more. We missed out on interviewing industries like **manufacturing and healthcare**, where shift planning gets even wilder.
+
+The lesson: Don’t assume one industry’s chaos is another’s norm. Design might be universal—but workflows sure as hell aren’t.

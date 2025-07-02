@@ -1,8 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { formatDate } from "app/blog/utils";
-import type { BlogPost } from "app/blog/data";
+import { formatDate, Post } from "app/writings/utils";
 import type { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { MDXRemote } from "next-mdx-remote";
 import { ImageCarousel } from "./ImageCarousel";
@@ -23,7 +22,7 @@ const components = {
 };
 
 interface BlogContentProps {
-    post: BlogPost;
+    post: Post;
     mdxSource: MDXRemoteSerializeResult;
 }
 

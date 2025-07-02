@@ -25,7 +25,7 @@ export function BlogPostNavigation({
                 <div className="text-left">
                     {previousPost ? (
                         <Link
-                            href={`/blog/${previousPost.slug}`}
+                            href={`/writings/${previousPost.slug}`}
                             className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
                         >
                             <span className="block text-sm mb-1">Previous</span>
@@ -40,7 +40,7 @@ export function BlogPostNavigation({
                 <div className="text-right">
                     {nextPost ? (
                         <Link
-                            href={`/blog/${nextPost.slug}`}
+                            href={`/writings/${nextPost.slug}`}
                             className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
                         >
                             <span className="block text-sm mb-1">Next</span>
