@@ -49,11 +49,12 @@ const projects: Project[] = [
     {
         title: "Badyetly",
         description:
-            "A platform for working people to track their finances better and achieve financial freedom.",
-        assetUrl: "https://i.imgur.com/HD6YPeQ.png",
+            "A platform for working people to track their subscriptions better and achieve financial freedom.",
+        assetUrl:
+            "https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Screenshot%202025-07-02%20at%2023.16.41-PoZKxKHV2Di5eYisxXSR5iZdqnDEFM.png",
         assetType: "image" as const,
         imageAlt: "Badyetly - Financial Freedom Platform",
-        projectUrl: "https://badyetly-mics.vercel.app/accounts",
+        projectUrl: "https://v0-monthly-dues-tracker.vercel.app",
         date: "January 2025",
         category: "Web App" as const,
     },

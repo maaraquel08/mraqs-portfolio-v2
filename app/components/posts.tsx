@@ -1,8 +1,12 @@
 import Link from "next/link";
-import { formatDate, getSortedBlogPosts } from "app/blog/utils";
+import { formatDate, getSortedBlogPosts, Post } from "app/writings/utils";
 
-export function BlogPosts() {
-    let sortedBlogs = getSortedBlogPosts();
+interface BlogPostsProps {
+    posts?: Post[];
+}
+
+export function BlogPosts({ posts }: BlogPostsProps = {}) {
+    let sortedBlogs = posts || getSortedBlogPosts();
 
     return (
         <div>
@@ -10,7 +14,7 @@ export function BlogPosts() {
                 <Link
                     key={post.slug}
                     className="flex flex-col space-y-1 mb-4"
-                    href={`/blog/${post.slug}`}
+                    href={`/writings/${post.slug}`}
                 >
                     <div className="w-full flex flex-col md:flex-row space-x-0 md:space-x-2">
                         <p className="text-neutral-600 dark:text-neutral-400 w-[160px] tabular-nums shrink-0">
