@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { useSound } from "@/app/hooks/useSound";
 import { Button } from "@/app/components/ui/button";
 import { HamburgerMenuIcon, Cross1Icon } from "@radix-ui/react-icons";
@@ -32,6 +33,7 @@ const navItems = {
 
 export function Navbar() {
     const { playArpeggio } = useSound();
+    const pathname = usePathname();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     function playClickSound() {
@@ -54,12 +56,25 @@ export function Navbar() {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     }
 
+    function isActive(path: string) {
+        if (path === "/") {
+            return pathname === "/";
+        }
+        return pathname.startsWith(path);
+    }
+
     function renderLinks(isMobile = false) {
         return Object.entries(navItems).map(
             ([path, { name, external }], index) => {
-                const baseClasses = `transition-all px-3 border-r border-gray-200 dark:border-gray-800 last:border-r-0 hover:text-neutral-800 dark:hover:text-neutral-200 flex relative py-2`;
+                const isCurrentPage = !external && isActive(path);
+
+                const baseClasses = `transition-all duration-300 ease-in-out px-3 border-r border-gray-200 dark:border-gray-800 last:border-r-0 hover:text-neutral-800 dark:hover:text-neutral-200 flex relative py-2 items-center gap-2`;
                 const mobileBaseClasses = isMobile
                     ? "text-lg py-2 border-r-0"
+                    : "";
+
+                const activeClasses = isCurrentPage
+                    ? "text-neutral-900 dark:text-neutral-100 font-medium"
                     : "";
 
                 const mobileAnimationClasses = isMobile
@@ -73,7 +88,11 @@ export function Navbar() {
                     ? { transitionDelay: `${index * 75}ms` }
                     : {};
 
-                const commonClasses = `${baseClasses} ${mobileBaseClasses} ${mobileAnimationClasses}`;
+                const commonClasses = `${baseClasses} ${mobileBaseClasses} ${mobileAnimationClasses} ${activeClasses}`;
+
+                const activeIndicator = isCurrentPage && (
+                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full flex-shrink-0" />
+                );
 
                 if (external) {
                     return (
@@ -86,6 +105,7 @@ export function Navbar() {
                             className={commonClasses}
                             style={mobileStyle}
                         >
+                            {activeIndicator}
                             {name}
                         </a>
                     );
@@ -98,6 +118,7 @@ export function Navbar() {
                         className={commonClasses}
                         style={mobileStyle}
                     >
+                        {activeIndicator}
                         {name}
                     </Link>
                 );
@@ -128,7 +149,7 @@ export function Navbar() {
                     className="hidden md:flex md:flex-row md:items-center relative px-0 pb-0 fade md:overflow-auto scroll-pr-6"
                     id="desktop-nav"
                 >
-                    <div className="flex flex-row bg-white/80 dark:bg-black/80 backdrop-blur-md border border-gray-200 dark:border-gray-800 rounded-lg shadow-lg">
+                    <div className="flex flex-row bg-white/80 dark:bg-black/80 backdrop-blur-md border border-gray-200 dark:border-gray-800 rounded-lg transition-all duration-300 ease-in-out">
                         {renderLinks(false)}
                     </div>
                 </nav>

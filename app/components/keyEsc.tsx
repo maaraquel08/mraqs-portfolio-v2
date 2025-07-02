@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState, useCallback } from "react";
 import { Button } from "@/app/components/ui/button";
 import { useSound } from "@/app/hooks/useSound";
@@ -13,6 +13,7 @@ interface KeyEscProps {
 export function KeyEsc({ context = "fixed" }: KeyEscProps) {
     // Default context to 'fixed'
     const router = useRouter();
+    const pathname = usePathname();
     const { playArpeggio } = useSound();
     const [isKeyPressed, setIsKeyPressed] = useState(false);
     const [isActionDebounced, setIsActionDebounced] = useState(false);
@@ -38,8 +39,13 @@ export function KeyEsc({ context = "fixed" }: KeyEscProps) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isActionDebounced, playArpeggio, router]);
 
-    // Add useEffect for keyboard listener
+    // Add useEffect for keyboard listener (only when not on home page)
     useEffect(() => {
+        // Don't set up listeners if we're on the home page
+        if (pathname === "/") {
+            return;
+        }
+
         function handleKeyDown(event: KeyboardEvent) {
             if (event.key === "Escape") {
                 if (!isKeyPressed) {
@@ -64,7 +70,7 @@ export function KeyEsc({ context = "fixed" }: KeyEscProps) {
             document.removeEventListener("keyup", handleKeyUp);
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isKeyPressed, triggerAction]);
+    }, [isKeyPressed, triggerAction, pathname]);
 
     // Base classes for appearance (size, color, shadow, etc.)
     const baseClasses =
@@ -77,6 +83,11 @@ export function KeyEsc({ context = "fixed" }: KeyEscProps) {
     // Positioning classes based on context
     const positionClasses =
         context === "fixed" ? "fixed top-4 left-4 z-50" : "relative"; // Use relative for mobile header context to flow correctly
+
+    // Don't render if we're on the home page
+    if (pathname === "/") {
+        return null;
+    }
 
     return (
         <Button
