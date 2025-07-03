@@ -55,7 +55,7 @@ const projects: Project[] = [
         assetType: "image" as const,
         imageAlt: "Badyetly - Financial Freedom Platform",
         projectUrl: "https://v0-monthly-dues-tracker.vercel.app",
-        date: "January 2025",
+        date: "July 2025",
         category: "Web App" as const,
     },
     {
@@ -80,6 +80,20 @@ const projects: Project[] = [
         category: "Component" as const,
         isInternal: true,
         slug: "datepicker",
+    },
+    {
+        title: "Timepicker",
+        description:
+            "A clean and interactive time picker component with 12h/24h format support.",
+        assetUrl:
+            "https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Timepicker_thumbnail-TVNGfTbdbKpYpe92b7aCY4NlsggjRp.png",
+        assetType: "image" as const,
+        imageAlt: "React Timepicker Component",
+        projectUrl: "/showcase/timepicker",
+        date: "July 2025",
+        category: "Component" as const,
+        isInternal: true,
+        slug: "timepicker",
     },
     {
         title: "Dynamic Drawer",
