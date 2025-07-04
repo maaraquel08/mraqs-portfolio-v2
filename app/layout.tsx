@@ -46,29 +46,9 @@ export default function RootLayout({
             suppressHydrationWarning
         >
             <head>
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: `
-                            (function() {
-                                function getInitialTheme() {
-                                    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-                                        return localStorage.getItem('theme');
-                                    }
-                                    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                                        return 'dark';
-                                    }
-                                    return 'light';
-                                }
-
-                                const theme = getInitialTheme();
-                                document.documentElement.classList.add(theme);
-                                localStorage.setItem('theme', theme);
-                            })();
-                        `,
-                    }}
-                />
+                {/* Theme detection script removed - fixed to light mode only */}
             </head>
-            <body className="text-black dark:text-white max-w-xl mx-auto mt-8 antialiased">
+            <body className="text-black max-w-xl mx-auto mt-8 antialiased">
                 <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
                     <Navbar />
                     {children}
