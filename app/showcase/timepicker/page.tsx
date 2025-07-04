@@ -24,7 +24,7 @@ export default function TimepickerShowcase() {
                 Time Picker Component
             </h1>
 
-            <p className="text-neutral-600 dark:text-neutral-400 mb-12 max-w-2xl">
+            <p className="text-neutral-600 mb-12 max-w-2xl">
                 A clean and interactive time picker component with input field
                 trigger and dropdown selection. Supports both 12-hour and
                 24-hour formats with keyboard and mouse interactions.
@@ -36,9 +36,9 @@ export default function TimepickerShowcase() {
                         <h2 className="text-lg font-semibold mb-2">
                             12-Hour Format
                         </h2>
-                        <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-3">
+                        <p className="text-sm text-neutral-600 mb-3">
                             Selected:{" "}
-                            <span className="font-mono bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">
+                            <span className="font-mono bg-neutral-100 px-2 py-1 rounded">
                                 {time12h || "None"}
                             </span>
                         </p>
@@ -57,9 +57,9 @@ export default function TimepickerShowcase() {
                         <h2 className="text-lg font-semibold mb-2">
                             24-Hour Format
                         </h2>
-                        <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-3">
+                        <p className="text-sm text-neutral-600 mb-3">
                             Selected:{" "}
-                            <span className="font-mono bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">
+                            <span className="font-mono bg-neutral-100 px-2 py-1 rounded">
                                 {time24h || "None"}
                             </span>
                         </p>

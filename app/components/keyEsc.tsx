@@ -74,7 +74,7 @@ export function KeyEsc({ context = "fixed" }: KeyEscProps) {
 
     // Base classes for appearance (size, color, shadow, etc.)
     const baseClasses =
-        "h-10 w-10 rounded-lg border border-black/10 dark:border-white/10 bg-orange-500 text-white hover:bg-orange-600 focus:outline-none dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-offset-black transition-transform duration-75 ease-in-out shadow-[0_3px_0_0_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.2)] font-medium text-xs";
+        "h-10 w-10 rounded-lg border border-black/10 bg-orange-500 text-white hover:bg-orange-600 focus:outline-none transition-transform duration-75 ease-in-out shadow-[0_3px_0_0_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.2)] font-medium text-xs";
 
     // Active state classes (from the original active: pseudo-classes)
     const activeClasses =

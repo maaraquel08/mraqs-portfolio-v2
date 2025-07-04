@@ -19,7 +19,7 @@ export default function Page() {
             {/* Case Studies Section */}
             {caseStudyPosts.length > 0 && (
                 <div className="mb-12">
-                    <h2 className="font-semibold text-xl mb-6 tracking-tight text-neutral-800 dark:text-neutral-200">
+                    <h2 className="font-semibold text-xl mb-6 tracking-tight text-neutral-800">
                         Case Studies
                     </h2>
                     <BlogPosts posts={caseStudyPosts} />
@@ -29,7 +29,7 @@ export default function Page() {
             {/* Blog Posts Section */}
             {blogPosts.length > 0 && (
                 <div>
-                    <h2 className="font-semibold text-xl mb-6 tracking-tight text-neutral-800 dark:text-neutral-200">
+                    <h2 className="font-semibold text-xl mb-6 tracking-tight text-neutral-800">
                         Blog Posts
                     </h2>
                     <BlogPosts posts={blogPosts} />

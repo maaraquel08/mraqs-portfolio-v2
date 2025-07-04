@@ -68,13 +68,13 @@ export function Navbar() {
             ([path, { name, external }], index) => {
                 const isCurrentPage = !external && isActive(path);
 
-                const baseClasses = `transition-all duration-300 ease-in-out px-3 border-r border-gray-200 dark:border-gray-800 last:border-r-0 hover:text-neutral-800 dark:hover:text-neutral-200 flex relative py-2 items-center gap-2`;
+                const baseClasses = `transition-all duration-300 ease-in-out px-3 border-r border-gray-200 last:border-r-0 hover:text-neutral-800 flex relative py-2 items-center gap-2`;
                 const mobileBaseClasses = isMobile
                     ? "text-lg py-2 border-r-0"
                     : "";
 
                 const activeClasses = isCurrentPage
-                    ? "text-neutral-900 dark:text-neutral-100 font-medium"
+                    ? "text-neutral-900 font-medium"
                     : "";
 
                 const mobileAnimationClasses = isMobile
@@ -149,13 +149,13 @@ export function Navbar() {
                     className="hidden md:flex md:flex-row md:items-center relative px-0 pb-0 fade md:overflow-auto scroll-pr-6"
                     id="desktop-nav"
                 >
-                    <div className="flex flex-row bg-white/80 dark:bg-black/80 backdrop-blur-md border border-gray-200 dark:border-gray-800 rounded-lg transition-all duration-300 ease-in-out">
+                    <div className="flex flex-row bg-white/80 backdrop-blur-md border border-gray-200 rounded-lg transition-all duration-300 ease-in-out">
                         {renderLinks(false)}
                     </div>
                 </nav>
 
                 <div
-                    className={`fixed inset-0 z-40 bg-white/95 dark:bg-black/95 backdrop-blur-sm flex flex-col items-center justify-center md:hidden transition-opacity duration-300 ease-in-out ${
+                    className={`fixed inset-0 z-40 bg-white/95 backdrop-blur-sm flex flex-col items-center justify-center md:hidden transition-opacity duration-300 ease-in-out ${
                         isMobileMenuOpen
                             ? "opacity-100 pointer-events-auto"
                             : "opacity-0 pointer-events-none"
