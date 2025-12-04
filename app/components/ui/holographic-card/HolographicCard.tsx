@@ -53,7 +53,7 @@ export default function HolographicCard({
     return (
         <div
             ref={cardRef}
-            className={`relative md:perspective-1000 ${className} w-full max-w-full md:w-auto mx-auto`}
+            className={`relative perspective-1000 ${className} w-full max-w-full md:w-auto mx-auto`}
             style={{
                 width: "100%",
                 maxWidth: `${cardWidth}px`,

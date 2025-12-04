@@ -168,6 +168,11 @@ table {
     }
 }
 
+/* Perspective utility for 3D card effects */
+.perspective-1000 {
+    perspective: 1000px;
+}
+
 /* Watermark refraction styles */
 .watermark {
     filter: saturate(0.9) contrast(1.1) brightness(1.2);
