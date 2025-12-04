@@ -1,7 +1,5 @@
-import { BlogPosts } from "app/components/posts";
-import SplineViewer from "./components/SplineViewer";
 import AboutSection from "./components/AboutSection";
-import { ShowcaseProjects } from "./components/showcase-projects";
+import { HolographicCard } from "./components/ui/holographic-card";
 
 export default function Page() {
     return (
@@ -9,8 +7,27 @@ export default function Page() {
             <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
                 My Portfolio
             </h1>
-            <div className="h-[500px] w-full pointer-events-none">
-                <SplineViewer url="https://prod.spline.design/OayK2citpuxtj5YZ/scene.splinecode" />
+
+            <div className="flex justify-center my-8">
+                <HolographicCard
+                    backgroundGradient={{
+                        from: "from-gray-100",
+                        via: "via-gray-200",
+                        to: "to-gray-300",
+                    }}
+                    content={{
+                        topSection: (
+                            <>
+                                <div className="text-sm font-semibold uppercase tracking-wider text-gray-600 mb-2 ">
+                                    Senior Product Designer
+                                </div>
+                                <h2 className="text-4xl font-bold mb-4 text-gray-700 text-sticker-shadow">
+                                    Michael Anthony Raquel
+                                </h2>
+                            </>
+                        ),
+                    }}
+                />
             </div>
             <AboutSection />
         </section>

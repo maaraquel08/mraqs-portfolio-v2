@@ -10,13 +10,16 @@ import Link from "next/link";
 
 // --- Constants ---
 
-const PANEL_ANIMATION_DURATION_SECONDS = 0.3;
+const PANEL_ANIMATION_DURATION_SECONDS = 0.6;
 
 const PANEL_BASE_STYLES =
     "absolute inset-0 w-[450px] h-[calc(100vh-3rem)] rounded-2xl bg-background shadow-lg flex flex-col overflow-hidden !pointer-events-auto";
 
 const PANEL_TRANSITION: MotionProps["transition"] = {
-    ease: "easeInOut",
+    //ease: [0.68, -0.55, 0.27, 1.55],
+    //ease: [0.79, 0.14, 0.15, 0.86],
+    ease: [0.68, -0.55, 0.11, 0.94],
+    //ease: [0.68, -0.6, 0.32, 1.6],
     duration: PANEL_ANIMATION_DURATION_SECONDS,
 };
 

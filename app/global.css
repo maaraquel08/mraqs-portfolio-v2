@@ -155,3 +155,121 @@ table {
 .text-muted-foreground {
     @apply text-[hsl(var(--muted-foreground))];
 }
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Watermark refraction styles */
+.watermark {
+    filter: saturate(0.9) contrast(1.1) brightness(1.2);
+    overflow: hidden;
+    /* Base background for watermark - shows when not hovering */
+    background: rgba(255, 255, 255, 0.4);
+    /* Apply mask to entire container so refraction shows through watermark shape */
+    mask-image: url("/images/Watermark.svg");
+    -webkit-mask-image: url("/images/Watermark.svg");
+    mask-size: contain;
+    -webkit-mask-size: contain;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-position: center;
+}
+
+.perspective-1000:hover .watermark {
+    /* When hovering, remove base background so refraction gradients show through */
+    background: transparent;
+}
+
+.watermark .refraction {
+    position: absolute;
+    width: 500%;
+    aspect-ratio: 1 / 1;
+    filter: saturate(2);
+    will-change: translate, scale, filter;
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
+    pointer-events: none;
+    /* Blend mode to add color to watermark rather than replace it */
+    mix-blend-mode: screen;
+}
+
+/* Show refraction only when card is hovered */
+.perspective-1000:hover .watermark .refraction {
+    opacity: 1;
+}
+
+.watermark .refraction:first-of-type {
+    /* Position gradient at cursor location */
+    --gradient-x: calc(50% + var(--pointer-x, 0) * 30%);
+    --gradient-y: calc(50% + var(--pointer-y, 0) * 30%);
+    background: radial-gradient(
+        circle at var(--gradient-x) var(--gradient-y),
+        hsl(5 100% 80%),
+        hsl(150 100% 60%),
+        hsl(59, 100%, 52%),
+        #0000 60%
+    );
+    /* Center the refraction layer */
+    top: 50%;
+    left: 50%;
+    bottom: unset;
+    right: unset;
+    transform-origin: center;
+    /* Position based on cursor */
+    --translate-x: calc(var(--pointer-x, 0) * 15%);
+    --translate-y: calc(var(--pointer-y, 0) * 15%);
+    transform: translate(
+            calc(-50% + var(--translate-x)),
+            calc(-50% + var(--translate-y))
+        )
+        scale(0.4);
+    transition: transform 0s, opacity 0.2s ease-out;
+}
+
+.watermark .refraction:nth-of-type(2) {
+    /* Position gradient at cursor location with slight offset */
+    --gradient-x-2: calc(50% + var(--pointer-x, 0) * 30%);
+    --gradient-y-2: calc(50% + var(--pointer-y, 0) * 30%);
+    background: radial-gradient(
+        circle at var(--gradient-x-2) var(--gradient-y-2),
+        hsl(5 100% 80%),
+        hsl(196, 100%, 60%),
+        hsl(94, 96%, 61%),
+        #0000 60%
+    );
+    /* Center the refraction layer */
+    top: 50%;
+    left: 50%;
+    bottom: unset;
+    right: unset;
+    transform-origin: center;
+    /* Position based on cursor with different offset */
+    --translate-x-2: calc(var(--pointer-x, 0) * 12%);
+    --translate-y-2: calc(var(--pointer-y, 0) * 12%);
+    transform: translate(
+            calc(-50% + var(--translate-x-2)),
+            calc(-50% + var(--translate-y-2))
+        )
+        scale(0.35);
+    transition: transform 0s, opacity 0.2s ease-out;
+}
+
+/* Sticker text effect with white outline */
+.text-sticker-shadow {
+    -webkit-text-stroke: 4px white;
+    text-stroke: 4px white;
+    paint-order: stroke fill;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+    text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
+        1px 1px 0 white, 0 0 4px rgba(255, 255, 255, 0.8);
+}
