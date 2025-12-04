@@ -82,24 +82,24 @@ export default function HolographicCard({
 
                 {/* Layer 3: Holographic Overlay */}
                 {!isMobile && (
-                    <HolographicOverlay
-                        mousePosition={mousePosition}
-                        isHovering={isHovering}
+                <HolographicOverlay
+                    mousePosition={mousePosition}
+                    isHovering={isHovering}
                         cardWidth={cardWidth}
                         cardHeight={cardHeight}
-                    />
+                />
                 )}
 
                 {!isMobile && <AnimatedGradient />}
 
                 {/* Layer 5: Light Reflection */}
                 {!isMobile && (
-                    <LightReflection
-                        mousePosition={mousePosition}
-                        isHovering={isHovering}
+                <LightReflection
+                    mousePosition={mousePosition}
+                    isHovering={isHovering}
                         cardWidth={cardWidth}
                         cardHeight={cardHeight}
-                    />
+                />
                 )}
 
                 {/* Layer 6: Content */}
@@ -117,11 +117,11 @@ export default function HolographicCard({
 
                 {/* Layer 7: Shine Effect */}
                 {!isMobile && (
-                    <CardShine
-                        mousePosition={mousePosition}
-                        isHovering={isHovering}
+                <CardShine
+                    mousePosition={mousePosition}
+                    isHovering={isHovering}
                         cardWidth={cardWidth}
-                    />
+                />
                 )}
 
                 {/* Layer 8: Border Glow */}

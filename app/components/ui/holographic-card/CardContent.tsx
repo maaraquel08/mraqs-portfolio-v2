@@ -52,16 +52,20 @@ export default function CardContent({
 
             {/* Avatar - positioned at bottom right with parallax effect */}
             <div
-                className="absolute bottom-0 right-0 w-full h-full transition-transform duration-300 ease-out"
+                className={`absolute bottom-0 w-full h-full transition-transform duration-300 ease-out ${
+                    isMobile ? "left-1/2" : "right-0"
+                }`}
                 style={{
-                    transform: `translate(${parallaxX}px, ${parallaxY}px)`,
+                    transform: isMobile
+                        ? `translateX(calc(-50% + ${parallaxX}px)) translateY(${parallaxY}px)`
+                        : `translate(${parallaxX}px, ${parallaxY}px)`,
                 }}
             >
                 <Image
                     src="/images/Avatar.png"
                     alt="Avatar"
                     fill
-                    className="object-contain object-bottom-right"
+                    className={`object-contain ${isMobile ? "object-bottom" : "object-bottom-right"}`}
                     priority
                 />
             </div>
