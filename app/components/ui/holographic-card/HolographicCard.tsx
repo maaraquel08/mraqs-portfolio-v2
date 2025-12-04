@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useMouseTracking } from "./useMouseTracking";
 import CardBackground from "./CardBackground";
 import HolographicOverlay from "./HolographicOverlay";
@@ -30,18 +31,36 @@ export default function HolographicCard({
     backgroundGradient,
 }: ExtendedHolographicCardProps) {
     const { cardRef, mousePosition, isHovering } = useMouseTracking();
+    const [isMobile, setIsMobile] = useState(false);
 
-    const rotateX = isHovering ? mousePosition.y / 10 - 20 : 0;
-    const rotateY = isHovering ? mousePosition.x / 10 - 20 : 0;
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
+    // Responsive dimensions - use CSS for mobile, fixed for desktop
+    const cardWidth = width;
+    const cardHeight = height;
+
+    // Reduce 3D rotation on mobile for better performance and UX
+    const rotateX = isMobile || !isHovering ? 0 : mousePosition.y / 10 - 20;
+    const rotateY = isMobile || !isHovering ? 0 : mousePosition.x / 10 - 20;
 
     return (
         <div
             ref={cardRef}
-            className={`relative perspective-1000 ${className}`}
+            className={`relative ${isMobile ? "" : "perspective-1000"} ${className} w-full max-w-full md:w-auto`}
             style={{
-                width: `${width}px`,
-                height: `${height}px`,
+                width: isMobile ? "calc(100% - 2rem)" : `${cardWidth}px`,
+                maxWidth: isMobile ? "100%" : `${cardWidth}px`,
+                height: isMobile ? "auto" : `${cardHeight}px`,
+                aspectRatio: isMobile ? `${width} / ${height}` : "auto",
                 transformStyle: "preserve-3d",
+                margin: isMobile ? "0 auto" : "0",
             }}
         >
             <div
@@ -62,22 +81,26 @@ export default function HolographicCard({
                 <CardWatermark isHovering={isHovering} />
 
                 {/* Layer 3: Holographic Overlay */}
-                <HolographicOverlay
-                    mousePosition={mousePosition}
-                    isHovering={isHovering}
-                    cardWidth={width}
-                    cardHeight={height}
-                />
+                {!isMobile && (
+                    <HolographicOverlay
+                        mousePosition={mousePosition}
+                        isHovering={isHovering}
+                        cardWidth={cardWidth}
+                        cardHeight={cardHeight}
+                    />
+                )}
 
-                <AnimatedGradient />
+                {!isMobile && <AnimatedGradient />}
 
                 {/* Layer 5: Light Reflection */}
-                <LightReflection
-                    mousePosition={mousePosition}
-                    isHovering={isHovering}
-                    cardWidth={width}
-                    cardHeight={height}
-                />
+                {!isMobile && (
+                    <LightReflection
+                        mousePosition={mousePosition}
+                        isHovering={isHovering}
+                        cardWidth={cardWidth}
+                        cardHeight={cardHeight}
+                    />
+                )}
 
                 {/* Layer 6: Content */}
                 {children ||
@@ -85,24 +108,27 @@ export default function HolographicCard({
                         <CardContent
                             {...content}
                             mousePosition={mousePosition}
-                            isHovering={isHovering}
-                            cardWidth={width}
-                            cardHeight={height}
+                            isHovering={isMobile ? false : isHovering}
+                            cardWidth={cardWidth}
+                            cardHeight={cardHeight}
+                            isMobile={isMobile}
                         />
                     ))}
 
                 {/* Layer 7: Shine Effect */}
-                <CardShine
-                    mousePosition={mousePosition}
-                    isHovering={isHovering}
-                    cardWidth={width}
-                />
+                {!isMobile && (
+                    <CardShine
+                        mousePosition={mousePosition}
+                        isHovering={isHovering}
+                        cardWidth={cardWidth}
+                    />
+                )}
 
                 {/* Layer 8: Border Glow */}
                 <CardBorder />
 
                 {/* Layer 9: Sticker - At the front */}
-                <CardSticker />
+                <CardSticker isMobile={isMobile} />
             </div>
         </div>
     );

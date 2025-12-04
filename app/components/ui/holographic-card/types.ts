@@ -21,5 +21,6 @@ export interface CardContentProps {
   isHovering?: boolean;
   cardWidth?: number;
   cardHeight?: number;
+  isMobile?: boolean;
 }
 

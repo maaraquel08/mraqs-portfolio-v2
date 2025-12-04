@@ -14,28 +14,29 @@ export default function CardContent({
     isHovering = false,
     cardWidth = 400,
     cardHeight = 600,
+    isMobile = false,
 }: CardContentProps) {
     const isExternalImage = imageUrl?.startsWith("http");
 
-    // Calculate parallax offset for avatar (moves opposite to cursor for depth effect)
-    const parallaxX = isHovering
+    // Disable parallax on mobile for better performance
+    const parallaxX = !isMobile && isHovering
         ? (mousePosition.x / cardWidth - 0.5) * -20
         : 0;
-    const parallaxY = isHovering
+    const parallaxY = !isMobile && isHovering
         ? (mousePosition.y / cardHeight - 0.5) * -20
         : 0;
 
     // Calculate parallax offset for text (slightly different intensity for layered effect)
-    const textParallaxX = isHovering
+    const textParallaxX = !isMobile && isHovering
         ? (mousePosition.x / cardWidth - 0.5) * -15
         : 0;
-    const textParallaxY = isHovering
+    const textParallaxY = !isMobile && isHovering
         ? (mousePosition.y / cardHeight - 0.5) * -15
         : 0;
 
     return (
         <div
-            className={`relative z-10 h-full flex flex-col justify-between p-8 text-white ${className}`}
+            className={`relative z-10 h-full flex flex-col justify-between ${isMobile ? "p-4 md:p-8" : "p-8"} text-white ${className}`}
         >
             {/* Top section with parallax effect */}
             {topSection && (
