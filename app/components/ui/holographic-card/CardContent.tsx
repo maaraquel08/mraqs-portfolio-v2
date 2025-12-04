@@ -36,7 +36,7 @@ export default function CardContent({
 
     return (
         <div
-            className={`relative z-10 h-full flex flex-col justify-between ${isMobile ? "p-4 md:p-8" : "p-8"} text-white ${className}`}
+            className={`relative z-10 h-full flex flex-col justify-between p-4 md:p-8 text-white ${className}`}
         >
             {/* Top section with parallax effect */}
             {topSection && (
@@ -52,20 +52,16 @@ export default function CardContent({
 
             {/* Avatar - positioned at bottom right with parallax effect */}
             <div
-                className={`absolute bottom-0 w-full h-full transition-transform duration-300 ease-out ${
-                    isMobile ? "left-1/2" : "right-0"
-                }`}
+                className="absolute bottom-0 right-0 md:right-0 left-1/2 md:left-auto w-full h-full transition-transform duration-300 ease-out"
                 style={{
-                    transform: isMobile
-                        ? `translateX(calc(-50% + ${parallaxX}px)) translateY(${parallaxY}px)`
-                        : `translate(${parallaxX}px, ${parallaxY}px)`,
+                    transform: `translateX(calc(${isMobile ? "-50% + " : ""}${parallaxX}px)) translateY(${parallaxY}px)`,
                 }}
             >
                 <Image
                     src="/images/Avatar.png"
                     alt="Avatar"
                     fill
-                    className={`object-contain ${isMobile ? "object-bottom" : "object-bottom-right"}`}
+                    className="object-contain object-bottom md:object-bottom-right"
                     priority
                 />
             </div>

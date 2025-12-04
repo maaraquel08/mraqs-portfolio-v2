@@ -53,18 +53,16 @@ export default function HolographicCard({
     return (
         <div
             ref={cardRef}
-            className={`relative ${isMobile ? "" : "perspective-1000"} ${className} w-full max-w-full md:w-auto`}
+            className={`relative md:perspective-1000 ${className} w-full max-w-full md:w-auto mx-auto`}
             style={{
-                width: isMobile ? "calc(100% - 2rem)" : `${cardWidth}px`,
-                maxWidth: isMobile ? "100%" : `${cardWidth}px`,
-                height: isMobile ? "auto" : `${cardHeight}px`,
-                aspectRatio: isMobile ? `${width} / ${height}` : "auto",
+                width: "100%",
+                maxWidth: `${cardWidth}px`,
+                aspectRatio: `${width} / ${height}`,
                 transformStyle: "preserve-3d",
-                margin: isMobile ? "0 auto" : "0",
             }}
         >
             <div
-                className="relative w-full h-full rounded-2xl overflow-hidden transition-transform duration-300 ease-out"
+                className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden transition-transform duration-300 ease-out"
                 style={{
                     transform: `rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`,
                     transformStyle: "preserve-3d",
@@ -129,7 +127,7 @@ export default function HolographicCard({
 
                 {/* Layer 9: Sticker - At the front */}
                 <CardSticker isMobile={isMobile} />
-            </div>
+                </div>
         </div>
     );
 }
