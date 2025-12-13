@@ -82,20 +82,6 @@ const projects: Project[] = [
         slug: "datepicker",
     },
     {
-        title: "Timepicker",
-        description:
-            "A clean and interactive time picker component with 12h/24h format support.",
-        assetUrl:
-            "https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Timepicker_thumbnail-TVNGfTbdbKpYpe92b7aCY4NlsggjRp.png",
-        assetType: "image" as const,
-        imageAlt: "React Timepicker Component",
-        projectUrl: "/showcase/timepicker",
-        date: "July 2025",
-        category: "Component" as const,
-        isInternal: true,
-        slug: "timepicker",
-    },
-    {
         title: "Dynamic Drawer",
         description: "A newly improved interaction for nested drawers.",
         assetUrl: "https://i.imgur.com/j3GWMnX.png",
@@ -116,7 +102,7 @@ const projects: Project[] = [
         assetType: "video" as const,
         imageAlt: "Shift Center Module - Employee Shift Management",
         projectUrl: "/showcase/shift-center",
-        date: "June 2025",
+        date: "October 2025",
         category: "Web App" as const,
         isInternal: true,
         slug: "shift-center",
