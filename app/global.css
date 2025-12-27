@@ -32,7 +32,24 @@
 html {
     min-width: 360px;
     scroll-behavior: smooth;
-    color-scheme: light; /* Force light mode */
+    color-scheme: light !important; /* Force light mode */
+    background-color: #ffffff !important;
+}
+
+/* Force light mode - prevent system dark mode override */
+html,
+body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+/* Override any dark mode media queries */
+@media (prefers-color-scheme: dark) {
+    html,
+    body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+    }
 }
 
 .prose .anchor {

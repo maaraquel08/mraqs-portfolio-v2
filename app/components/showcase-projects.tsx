@@ -178,7 +178,7 @@ function ProjectCard({ project }: { project: Project }) {
         project.assetType === "video" || isVideoUrl(project.assetUrl);
 
     return (
-        <div className="w-full h-full overflow-hidden rounded-lg border border-gray-200 bg-card text-card-foreground flex flex-col group transition-shadow duration-200 ease-in-out hover:shadow-md">
+        <div className="w-full h-full overflow-hidden rounded-lg border border-gray-200 bg-white text-card-foreground flex flex-col group transition-shadow duration-200 ease-in-out hover:shadow-md">
             <div className="aspect-video overflow-hidden">
                 {shouldRenderAsVideo ? (
                     <video

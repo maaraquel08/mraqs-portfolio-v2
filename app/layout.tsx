@@ -44,11 +44,16 @@ export default function RootLayout({
             lang="en"
             className={`${GeistSans.className}`}
             suppressHydrationWarning
+            style={{ colorScheme: "light" }}
         >
             <head>
-                {/* Theme detection script removed - fixed to light mode only */}
+                <meta name="color-scheme" content="light" />
+                <meta name="theme-color" content="#ffffff" />
             </head>
-            <body className="text-black max-w-xl mx-auto mt-8 antialiased">
+            <body
+                className="text-black bg-white max-w-xl mx-auto mt-8 antialiased"
+                style={{ backgroundColor: "#ffffff", color: "#000000" }}
+            >
                 <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
                     <Navbar />
                     {children}

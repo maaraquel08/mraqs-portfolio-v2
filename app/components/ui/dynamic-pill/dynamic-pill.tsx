@@ -48,7 +48,7 @@ function DynamicPill({
     const [activeSectionId, setActiveSectionId] = useState<string | null>(
         sections[0]?.id || null
     );
-    const [isCollapsed, setIsCollapsed] = useState(false);
+    const [isCollapsed, setIsCollapsed] = useState(true);
     const totalSeconds = timeToSeconds(totalTime);
     const articleRef = useRef<HTMLElement | null>(null);
     const headingOffsets = useRef<{ id: string; offsetTop: number }[]>([]);

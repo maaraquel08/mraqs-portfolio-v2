@@ -188,7 +188,7 @@ export default async function Blog({ params }: BlogPageProps) {
         <section>
             <Link
                 href="/writings"
-                className="inline-block mb-6 text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+                className="inline-block mb-6 text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
                 aria-label="Back to Writings list"
             >
                 <Button variant="ghost" size="sm">
@@ -203,16 +203,16 @@ export default async function Blog({ params }: BlogPageProps) {
                     __html: JSON.stringify(jsonLd),
                 }}
             />
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 mb-2">
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-neutral-900 mb-2">
                 {post.metadata.title}
             </h1>
-            <div className="mb-8 text-sm text-neutral-600 dark:text-neutral-400">
+            <div className="mb-8 text-sm text-neutral-600">
                 <time dateTime={post.metadata.publishedAt}>
                     {formatDate(post.metadata.publishedAt)}
                 </time>
             </div>
             <article
-                className="prose prose-neutral dark:prose-invert max-w-none lg:prose-lg"
+                className="prose prose-neutral max-w-none lg:prose-lg"
                 id="blog-content-article"
             >
                 <CustomMDX source={mdxSource} />

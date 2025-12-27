@@ -20,13 +20,13 @@ export function BlogPostNavigation({
     }
 
     return (
-        <nav className="mt-12 border-t border-neutral-200 dark:border-neutral-700 pt-8">
+        <nav className="mt-12 border-t border-neutral-200 pt-8">
             <div className="grid grid-cols-2 gap-8">
                 <div className="text-left">
                     {previousPost ? (
                         <Link
                             href={`/writings/${previousPost.slug}`}
-                            className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+                            className="text-neutral-600 hover:text-neutral-900 transition-colors"
                         >
                             <span className="block text-sm mb-1">Previous</span>
                             <span className="font-medium">
@@ -41,7 +41,7 @@ export function BlogPostNavigation({
                     {nextPost ? (
                         <Link
                             href={`/writings/${nextPost.slug}`}
-                            className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+                            className="text-neutral-600 hover:text-neutral-900 transition-colors"
                         >
                             <span className="block text-sm mb-1">Next</span>
                             <span className="font-medium">
