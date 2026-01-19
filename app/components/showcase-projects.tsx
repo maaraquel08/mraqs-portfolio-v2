@@ -28,7 +28,7 @@ const projects: Project[] = [
         description:
             "A feature rich reports builder for an HRIS and Payroll System.",
         assetUrl:
-            "https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Reports%20Builder-V2JOPt9PeuRNwt10RCun2XVIJEsvS6.png",
+            "https://i.imgur.com/WahCp1L.png",
         assetType: "image" as const,
         imageAlt: "Reports Builder",
         projectUrl: "https://reports-builder.vercel.app/",
@@ -51,7 +51,7 @@ const projects: Project[] = [
         description:
             "A platform for working people to track their subscriptions better and achieve financial freedom.",
         assetUrl:
-            "https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Screenshot%202025-07-02%20at%2023.16.41-PoZKxKHV2Di5eYisxXSR5iZdqnDEFM.png",
+            "https://i.imgur.com/jQlhJto.png",
         assetType: "image" as const,
         imageAlt: "Badyetly - Financial Freedom Platform",
         projectUrl: "https://v0-monthly-dues-tracker.vercel.app",
@@ -112,7 +112,7 @@ const projects: Project[] = [
         description:
             "A design system for a company that provides a set of guidelines for creating consistent and user-friendly interfaces. Made in Vue.",
         assetUrl:
-            "https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Screenshot%202025-06-20%20at%2001.15.50-W9LgUlcj6h15a4QsqaZjurDHi4QqZm.png",
+            "https://i.imgur.com/7Wl1K3o.png",
         assetType: "image" as const,
         imageAlt: "Sprout Design System",
         projectUrl: "https://jolly-rock-0e7e9fa00.5.azurestaticapps.net/",
