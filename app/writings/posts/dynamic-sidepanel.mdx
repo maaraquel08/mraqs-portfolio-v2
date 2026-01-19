@@ -1,0 +1,299 @@
+---
+title: "Dynamic Sidepanel: From Component to System"
+publishedAt: "2026-01-20"
+summary: "A new way how to manage your complex data through design"
+type: "case-study"
+---
+<ImageBlock
+    src="https://i.imgur.com/C7pzrj2.png"
+    alt="Dynamic Side Panel"
+    containerHeight="400"
+/>
+# Case Study: When Systems Click
+
+## The Beauty of a Well-Designed Side Panel
+
+This case study is about something deceptively simple: a side panel.
+
+Not the flashy kind. Not the one you notice immediately.
+
+But the kind that quietly does the heavy lifting. The kind that scales with complexity. The kind that makes users think, "Wow, this just makes sense."
+
+By combining progressive disclosure, strong product knowledge, and a reusable design system, we reduced cognitive load, preserved context, and enabled complex actions (like multi-step leave applications) without fragmenting the user experience.
+
+The result was not just a cleaner UI, but a consistent interaction model that scaled across products, features, and teams.
+
+---
+
+## Context
+
+Time & Attendance products are inherently complex.
+
+On the surface, they look simple: clock in, clock out, track hours.
+
+Underneath, they are anything but.
+
+You are dealing with:
+
+* Shifts that change per employee
+* Holidays that vary by location
+* Attendance anomalies
+* Leaves, undertime, overtime, and corrections
+* Supporting documents like certificates and approvals
+
+And all of this needs to coexist in a single experience, often inside one screen, without overwhelming the user.
+
+We needed an approach that could handle **increasing complexity without increasing confusion**.
+
+---
+
+## The Problem
+
+Our challenge was not a lack of features. It was **too much information competing for attention**.
+
+We saw three major issues:
+
+1. **Information overload**
+   Users were forced to jump between pages just to understand a single attendance record.
+
+2. **Fragmented mental model**
+   Shifts lived in one place. Holidays in another. Requests somewhere else entirely. Nothing felt connected.
+
+3. **Poor scalability**
+   Every new attendance feature meant either adding another modal or creating yet another page. The UI was growing sideways instead of deeper.
+
+We needed a way to progressively reveal complexity without making users feel like they were opening a filing cabinet every time.
+
+---
+
+## What We Were Trying to Achieve
+
+Our goal was simple to say, hard to execute:
+
+> Show everything, without showing everything all at once.
+
+More concretely, we wanted to:
+
+* Keep users grounded in context
+* Reveal information progressively based on intent
+* Support simple and complex use cases in the same flow
+* Make the system extensible without redesigning every feature
+
+This is where **progressive disclosure** became our north star.
+
+---
+
+## The Design Insight: Progressive Disclosure Through Side Panels
+
+Instead of sending users away from their current context, we brought the information to them.
+
+The side panel became our canvas.
+
+Think of it as a controlled expansion of detail:
+
+* You start with a single attendance row
+* You open a side panel
+* Information unfolds based on what you need next
+
+Not everything appears at once. And that is intentional.
+
+---
+
+## How the Dynamic Side Panel Works
+
+> **Visual note:** This section is intentionally paired with short clips and GIFs. The goal is not to decorate the case study, but to anchor abstract concepts in real interactions. Each clip demonstrates how the same side panel pattern adapts without breaking context.
+
+### Level 1: Core Context
+
+<VideoBlock src="https://i.imgur.com/gkbMg7F.mp4" alt="cto" />
+
+This clip starts on the attendance dashboard widget.
+
+Users immediately see:
+
+* Their scheduled shift for the day
+* Actual time logs (time in, time out)
+
+The key interaction happens when the user selects the shift block.
+
+Instead of navigating away, the side panel slides in.
+
+What changes is not the page, but the depth of information.
+
+At its most basic state, the side panel answers one question:
+
+"What happened on this day?"
+
+It shows:
+
+* Actual time in and time out
+* Assigned shift
+* Attendance status
+
+The side panel now shows:
+
+* Shift schedule and rules
+* Breaks and expected durations
+* Notes tied to that specific shift
+
+All of this happens while the dashboard remains visible in the background.
+
+This alone already removes the need to navigate elsewhere and reinforces a strong sense of place.
+
+---
+
+### Level 2: Supporting Information
+
+<VideoBlock src="https://i.imgur.com/hVtyng8.mp4" alt="cto" />
+
+As users scroll or interact, we progressively reveal more layers:
+
+* Shift rules
+* Holiday overlaps
+* Exceptions or flags
+
+The key here is that these are **contextual**, not decorative.
+
+They only appear because they matter to the day being viewed.
+
+---
+
+### Level 3: Actions and Requests
+
+<VideoBlock src="https://i.imgur.com/d80DR4d.mp4" alt="cto" />
+
+This is where the side panel truly proves its value.
+
+Applying for leave is a complex task. There are policies, dates, balances, and validations involved.
+
+Instead of presenting one massive form, the experience is broken into **four clear steps**, all within the same side panel.
+
+This is where complexity usually explodes.
+
+Instead of throwing users into a new page, the side panel evolves:
+
+* Apply for leave
+* Request corrections
+* Submit certificates of attendance
+
+Each step focuses on a single decision:
+
+1. Select leave type and dates
+2. Review leave balances
+3. Provide supporting details or documents
+4. Final review and submission
+
+Users complete one step at a time, reducing cognitive load and preventing overwhelm.
+
+Each action follows the same pattern. Same layout. Same interaction model.
+
+Different content, same system.
+
+---
+
+## Reusability Across the System
+
+**📌 Design once, scale everywhere**
+
+
+<GallerySlideshow
+    className="my-8"
+    images={[
+        {
+            src: "https://i.imgur.com/C7pzrj2.png",
+            alt: "sidepanel-1",
+        },
+        {
+            src: "https://i.imgur.com/9vXPscp.png",
+            alt: "sidepanel-2",
+        },
+        {
+            src: "https://i.imgur.com/gDbahJv.png",
+            alt: "sidepanel-3",
+        },
+        {
+            src: "https://i.imgur.com/zKTlmGh.png",
+            alt: "sidepanel-4",
+        },
+    ]}
+/>
+
+This side panel was designed as a reusable interaction pattern, not a feature-specific UI.
+
+The same behavior appears across:
+
+Attendance dashboards
+
+Requests and approvals
+
+Other HR workflows
+
+Users learn the pattern once and apply it everywhere. Only the content changes.
+
+For teams, this meant faster delivery and fewer design debates. For users, it meant confidence and predictability.
+---
+
+## Why the Design System Made This Possible
+
+This entire experience would have collapsed without a strong design system.
+
+The side panel was not a one-off component. It was a **pattern**.
+
+Because we had:
+
+* Standardized spacing and hierarchy
+* Reusable form patterns
+* Clear rules for headers, sections, and actions
+
+We could plug in new use cases without reinventing the UI.
+
+The system did the thinking for us.
+
+When new teams needed a side panel, they were not asking *how* to design it.
+
+They were asking *what content belongs at which level*.
+
+That is when you know the system is working.
+
+---
+
+## The Role of Product Knowledge
+
+Here is the part that does not get talked about enough.
+
+This was not just a design exercise.
+
+Understanding Time & Attendance deeply changed the outcome:
+
+* Knowing which data mattered first
+* Understanding approval flows
+* Anticipating edge cases before they surfaced
+
+Product knowledge allowed us to design **with empathy and foresight**, not just aesthetics.
+
+Design systems scale UI.
+Product knowledge scales decisions.
+
+---
+
+## The Impact
+
+The results were subtle but powerful:
+
+* Fewer context switches
+* Faster task completion
+* Easier onboarding for new users
+* Faster development for new attendance features
+
+Most importantly, the system felt calm, even when the data was not.
+
+---
+
+## Key Takeaways
+
+1. Complexity is inevitable. Confusion is optional.
+2. Progressive disclosure is a strategy, not a gimmick.
+3. Design systems are force multipliers when paired with real product understanding.
+4. The best UI often disappears when it is working.
+
+Good design systems do more than create consistency. They allow teams to design once, scale thoughtfully, and respect user attention even as products grow more complex. This side panel worked not because it was clever, but because it **understood the product deeply**. That is what makes systems last.
