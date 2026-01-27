@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface ImageBlockProps {
     src: string;
@@ -25,9 +25,10 @@ export function ImageBlock({
     width = 1200,
     height = 630,
     caption,
-    containerHeight = "500px",
+    containerHeight,
 }: ImageBlockProps) {
     const [isZoomed, setIsZoomed] = useState(false);
+    const [aspectRatio, setAspectRatio] = useState<string | null>(null);
 
     const handleImageClick = () => {
         setIsZoomed(true);
@@ -37,12 +38,41 @@ export function ImageBlock({
         setIsZoomed(false);
     };
 
-    // Handle height value with or without units
-    const getHeightValue = (height: string) => {
-        if (typeof height === "number" || !isNaN(Number(height))) {
-            return `${height}px`;
+    // Load image to get natural dimensions and calculate aspect ratio
+    useEffect(() => {
+        if (containerHeight) {
+            return;
         }
-        return height;
+
+        // Use props as fallback aspect ratio
+        const fallbackAspectRatio = `${width} / ${height}`;
+        setAspectRatio(fallbackAspectRatio);
+
+        const img = new window.Image();
+        img.onload = () => {
+            if (img.naturalWidth > 0 && img.naturalHeight > 0) {
+                const naturalAspectRatio = `${img.naturalWidth} / ${img.naturalHeight}`;
+                setAspectRatio(naturalAspectRatio);
+            }
+        };
+        img.onerror = () => {
+            // If image fails to load, keep fallback aspect ratio
+        };
+        img.src = src;
+    }, [src, width, height, containerHeight]);
+
+    // Get container style
+    const getContainerStyle = () => {
+        if (containerHeight) {
+            if (typeof containerHeight === "number" || !isNaN(Number(containerHeight))) {
+                return { height: `${containerHeight}px` };
+            }
+            return { height: containerHeight };
+        }
+        if (aspectRatio) {
+            return { aspectRatio };
+        }
+        return { aspectRatio: `${width} / ${height}` };
     };
 
     return (
@@ -54,15 +84,13 @@ export function ImageBlock({
                 >
                     <div
                         className="relative w-full"
-                        style={{
-                            height: getHeightValue(containerHeight),
-                        }}
+                        style={getContainerStyle()}
                     >
                         <Image
                             src={src}
                             alt={alt}
                             fill
-                            className="object-cover"
+                            className="object-contain"
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
                             priority
                         />
@@ -78,23 +106,41 @@ export function ImageBlock({
             {/* Zoom Modal */}
             {isZoomed && (
                 <div
-                    className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-2 md:p-4"
+                    className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
                     onClick={handleClose}
                 >
-                    <div className="relative w-full max-w-7xl mx-auto px-4">
-                        <button
-                            onClick={handleClose}
-                            className="absolute -top-8 md:-top-12 right-4 p-2 text-white hover:text-neutral-300 transition-colors"
+                    {/* Close button */}
+                    <button
+                        onClick={handleClose}
+                        className="fixed top-4 right-4 p-2 text-white hover:text-neutral-300 transition-colors z-10 bg-black/50 rounded-full"
+                    >
+                        <X className="w-6 h-6" />
+                    </button>
+
+                    {/* Caption/Title */}
+                    {caption && (
+                        <div className="fixed bottom-4 left-4 bg-black/70 text-white pl-2 pr-4 py-2 rounded-lg z-10 w-fit h-fit" style={{ width: 'fit-content', height: 'fit-content' }}>
+                            <p className="text-sm font-medium" style={{ color: '#ffffff' }}>{caption}</p>
+                        </div>
+                    )}
+
+                    <div className="relative flex flex-col items-center justify-center w-full h-full max-w-7xl mx-auto">
+                        <div
+                            className="relative flex items-center justify-center max-h-[90vh] max-w-full"
+                            onClick={(e) => e.stopPropagation()}
                         >
-                            <X className="w-6 h-6" />
-                        </button>
-                        <div className="relative w-full h-[80vh] md:h-[90vh]">
                             <Image
                                 src={src}
                                 alt={alt}
-                                fill
-                                className="object-contain"
-                                sizes="100vw"
+                                width={1200}
+                                height={0}
+                                style={{
+                                    height: "auto",
+                                    maxHeight: "90vh",
+                                    width: "auto",
+                                    maxWidth: "100%",
+                                }}
+                                className="object-contain rounded-lg"
                                 priority
                             />
                         </div>
