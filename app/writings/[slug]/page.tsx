@@ -185,7 +185,7 @@ export default async function Blog({ params }: BlogPageProps) {
     };
 
     return (
-        <section>
+        <section className="p-10 border border-gray-300 rounded-3xl">
             <Link
                 href="/writings"
                 className="inline-block mb-6 text-sm text-neutral-600 hover:text-neutral-900 transition-colors"

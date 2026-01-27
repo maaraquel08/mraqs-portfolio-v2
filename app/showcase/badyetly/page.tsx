@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { CornerUpLeft, X, Heart } from "lucide-react";
+import { CornerUpLeft, X, Heart, ExternalLink } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
@@ -18,56 +18,42 @@ interface FeedItem {
 const feedItems: FeedItem[] = [
     {
         type: "video",
-        src: "https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Timeline%201-aUjxn0rKhHNHJwMdh9ygbwnkH7EjfO.mov",
-        alt: "Interactive Calendar Prototype",
-        title: "Interactive Calendar Prototype",
-        description: "A comprehensive shift management system that allows users to create custom shifts and assign them to employees efficiently.",
+        src: "https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Badyetly/Calendar%20Hover%20Action.mov",
+        alt: "Calendar Action Hover",
+        title: "Calendar Action Hover",
+        description: "Interactive calendar with hover actions for managing bills and subscriptions.",
     },
     {
-        type: "image",
-        src: "https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Calendar%20Side%20Panel-1PE3DC3gBnZA9kywMksGem3puIMMbl.png",
-        alt: "Calendar Side Panel",
-        title: "Shift Detailed View",
-        description: "Detailed view of shift information in the side panel interface.",
+        type: "video",
+        src: "https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Badyetly/Adding%20New%20Bill.mov",
+        alt: "Adding New Bill",
+        title: "Adding New Bill",
+        description: "Streamlined process for adding new bills and subscriptions to track.",
     },
     {
-        type: "image",
-        src: "https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Calendar-kMS9fbw28IdhQOItkfrud58XMQYmKi.png",
-        alt: "Calendar",
-        title: "Calendar View",
-        description: "Main calendar interface for viewing and managing shifts.",
+        type: "video",
+        src: "https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Badyetly/Paid%20Bill.mov",
+        alt: "Paid Bill",
+        title: "Paid Bill",
+        description: "Marking bills as paid and updating subscription status.",
     },
     {
-        type: "image",
-        src: "https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Shift%20Assignment-3-2a6V06lrkhmZI0aAv5DksUft1Gnfmf.png",
-        alt: "Shift Assignment",
-        title: "Shift Assignment",
-        description: "Interface for assigning shifts to employees.",
+        type: "video",
+        src: "https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Badyetly/Financial%20Reports.mov",
+        alt: "Financial Reports",
+        title: "Financial Reports",
+        description: "Comprehensive financial reports and insights for better money management.",
     },
     {
-        type: "image",
-        src: "https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Shift%20Builder-1-HSte2raBIjn9liZ4nhPrWGoIJbcKy7.png",
-        alt: "Fixed Shift",
-        title: "Fixed Shift Builder",
-        description: "Creating fixed shifts with specific time schedules.",
-    },
-    {
-        type: "image",
-        src: "https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Shift%20Builder-ZC8adRroEvJGk5iFcvyxeEX3BkCjCS.png",
-        alt: "Flexible Shift",
-        title: "Flexible Shift Builder",
-        description: "Creating flexible shifts with variable time ranges.",
-    },
-    {
-        type: "image",
-        src: "https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Shift%20Center-g6GmmpA7adV8NHiHVRnXOfeUuRVQxX.png",
-        alt: "Shift Center",
-        title: "Shift Center Dashboard",
-        description: "Main dashboard for managing all shift-related operations.",
+        type: "video",
+        src: "https://qlvb7icylt05jsqd.public.blob.vercel-storage.com/Portfolio/Badyetly/Config.mov",
+        alt: "Config",
+        title: "Config",
+        description: "Configuration settings for customizing your financial tracking experience.",
     },
 ];
 
-export default function ShiftCenterShowcase() {
+export default function BadyetlyShowcase() {
     const [selectedImage, setSelectedImage] = useState<number | null>(null);
     const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
     const [aspectRatios, setAspectRatios] = useState<Record<number, string>>({});
@@ -157,14 +143,22 @@ export default function ShiftCenterShowcase() {
             </Link>
 
             <div className="mb-8">
-                <h1 className="font-semibold text-2xl tracking-tighter mb-4">
-                    Shift Center Module
-                </h1>
+                <div className="flex items-center gap-3 mb-4">
+                    <h1 className="font-semibold text-2xl tracking-tighter">
+                        Badyetly
+                    </h1>
+                    <a
+                        href="https://v0-monthly-dues-tracker.vercel.app"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center transition-colors hover:text-foreground text-muted-foreground"
+                    >
+                        <ExternalLink className="h-5 w-5" />
+                    </a>
+                </div>
                 <p className="text-muted-foreground">
-                    A comprehensive shift management system that allows
-                    users to create custom shifts and assign them to
-                    employees efficiently. Built for Sprout Solutions' HRIS
-                    platform.
+                    A platform for working people to track their subscriptions
+                    better and achieve financial freedom.
                 </p>
             </div>
 

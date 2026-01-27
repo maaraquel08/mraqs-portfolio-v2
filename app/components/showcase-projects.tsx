@@ -54,20 +54,11 @@ const projects: Project[] = [
             "https://i.imgur.com/jQlhJto.png",
         assetType: "image" as const,
         imageAlt: "Badyetly - Financial Freedom Platform",
-        projectUrl: "https://v0-monthly-dues-tracker.vercel.app",
+        projectUrl: "/showcase/badyetly",
         date: "July 2025",
         category: "Web App" as const,
-    },
-    {
-        title: "Feliz Jewelry",
-        description:
-            "A Jewelry Portfolio website with a clean and modern design.",
-        assetUrl: "https://i.imgur.com/LJ7Gyx8.png",
-        assetType: "image" as const,
-        imageAlt: "Feliz Jewelry",
-        projectUrl: "https://feliz-jewelry.vercel.app/",
-        date: "February 2025",
-        category: "Website" as const,
+        isInternal: true,
+        slug: "badyetly",
     },
     {
         title: "Datepicker",
@@ -133,9 +124,9 @@ const categoryColors: Record<Category, string> = {
 
 export function ShowcaseProjects() {
     return (
-        <div className="columns-1 sm:columns-2 lg:columns-2 xl:columns-2 2xl:columns-3 gap-6 space-y-0">
+        <div className="grid grid-cols-1 gap-6">
             {projects.map((project, index) => (
-                <div key={index} className="break-inside-avoid mb-6">
+                <div key={index}>
                     {project.isInternal ? (
                         <Link
                             href={project.projectUrl}
@@ -178,7 +169,7 @@ function ProjectCard({ project }: { project: Project }) {
         project.assetType === "video" || isVideoUrl(project.assetUrl);
 
     return (
-        <div className="w-full h-full overflow-hidden rounded-lg border border-gray-200 bg-white text-card-foreground flex flex-col group transition-shadow duration-200 ease-in-out hover:shadow-md">
+        <div className="w-full h-full overflow-hidden rounded-2xl border border-gray-200 bg-white text-card-foreground flex flex-col group transition-shadow duration-200 ease-in-out hover:shadow-md">
             <div className="aspect-video overflow-hidden">
                 {shouldRenderAsVideo ? (
                     <video
